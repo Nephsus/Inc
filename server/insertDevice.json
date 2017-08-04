@@ -1,0 +1,14 @@
+{
+  "headerData": {
+    "pagination": {
+      "paginationflag": false,
+      "paginationKey":""
+    }
+  },
+  "insertDeviceOutputType": {
+
+     "status":"OPERACION REALIZADA",
+     "description":"El alta del dispositivo se ha realizado correctamente"
+
+  }
+}

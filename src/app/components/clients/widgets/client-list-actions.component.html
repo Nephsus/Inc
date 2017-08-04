@@ -1,0 +1,10 @@
+
+<div class="container-fluid">
+    <div class="row" >
+        <a  *ngFor="let action of listActions; let i = index" 
+            class="btn btn-primary btn-rounded" 
+            style="margin-right: 5px;" 
+            (click)="clickAction( i + 1 )"  ><i class="fa fa-check"></i>{{action}}</a>
+    </div>
+</div>
+

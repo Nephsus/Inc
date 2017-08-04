@@ -1,0 +1,30 @@
+ {
+     "headerData":{
+             "pagination":{
+                      "paginationFlag" : "true", 
+                      "paginationKey":"3" 
+                        }
+                   },
+  "registeredDevicesOutputType": {
+    "user": {
+      "code": "27047709",
+      "name": "David",
+      "lastName": "Cava Jiménez",
+      "documentID": "30966054G"
+    },
+    "devicesRegistered": [
+      {
+        "deviceType": "ONEPLUS",
+        "platform": "iOS 9.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "ONEPLUS2222",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      }
+    ]
+   }
+ }

@@ -1,0 +1,50 @@
+<ng-template functional-success></ng-template>
+<div id="wrapper">
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                <li class="nav-header">
+                    <div class="dropdown profile-element">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                            <span class="clear"> <span class="block m-t-xs"> <strong class="font-bold">{{this.employee?.getName()}}</strong>
+                             </span> <span class="text-muted text-xs block">{{this.employee?.getRol()}} <b class="caret"></b></span> </span> </a>
+                            <ul class="dropdown-menu animated fadeInRight m-t-xs">
+                                <li><a href="#">Logout</a></li>
+                            </ul>
+                    </div>
+                    <div class="logo-element"> 
+                        INC
+                    </div>
+                </li>
+                <li  routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+                    <a href="javascript:void(0)" [routerLink]="['/']" ><i class="fa fa-area-chart"></i> <span class="nav-label">Estadísticas</span></a>
+                </li>
+                <li routerLinkActive="active" >
+                    <a href="javascript:void(0)" routerLink="MainClient"><i class="fa fa-user-circle"></i> <span class="nav-label">Gestion de Clientes</span> </a>
+                </li>
+                <li routerLinkActive="active" >
+                    <a href="javascript:void(0)" routerLink="MainAudit"><i class="fa fa-tasks"></i> <span class="nav-label">Auditoría</span> </a>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+
+    <div id="page-wrapper" class="gray-bg">
+        <div class="row border-bottom">
+            <headernavbar></headernavbar>
+        </div>
+         <!-- Router Outlet -->
+    <router-outlet></router-outlet>
+
+        <div class="footer">
+            <div class="pull-right">
+                Created with <strong>Angular</strong> 4.
+            </div>
+            <div>
+                <strong>Copyright</strong> Itecban Notification Center by <img src="assets/img/logo_indra.png">
+            </div>
+        </div>
+
+    </div>
+</div>

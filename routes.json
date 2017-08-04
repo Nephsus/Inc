@@ -1,0 +1,9 @@
+{
+  "/inc/services/statistics/getStadisticsResponse": "/getStadisticsResponse",
+  "/inc/services/registereddevices/getDevices": "/getDevices",
+  "/inc/services/registereddevices/getDevices2": "/getDevices2",
+  "/inc/services/registereddevices/getDevices3": "/getDevices3",
+  "/inc/services/enviorementdash/getEmployeeResponse": "/getEmployeeResponse",
+  "/inc/services/statistics/getStadisticsResponseFilter":"/getStadisticsResponseFilter",
+  "/inc/services/statistics/getSendAlarms":"/getSendAlarms"
+}

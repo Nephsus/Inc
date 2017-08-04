@@ -1,0 +1,10 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <mainclientsearch [hidden]="windowsToShow !== 0"></mainclientsearch>
+    <clientlistevents [hidden]="windowsToShow !== 1" (clickGoBack)="restore($event);" ></clientlistevents>
+    <sendpush [hidden]="windowsToShow !== 3" (clickGoBack)="restore($event);" ></sendpush>
+    <adddevice [hidden]="windowsToShow !== 4" (clickGoBack)="restore($event);" ></adddevice>
+
+    <div id="wrapperHistory" *ngIf="windowsToShow === 5">
+    <history-push-for-client  (clickGoBack)="restore($event);" ></history-push-for-client>
+    </div>
+</div>

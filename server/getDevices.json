@@ -1,0 +1,94 @@
+ {
+     "headerData":{
+             "pagination":{
+                      "paginationFlag" : "true", 
+                      "paginationKey":"2" 
+                        }
+                   },
+  "registeredDevicesOutputType": {
+    "user": {
+      "code": "27047709",
+      "name": "David",
+      "lastName": "Cava Jiménez",
+      "documentID": "30966054G"
+    },
+    "devicesRegistered": [
+      {
+        "deviceType": "iphone1",
+        "platform": "iOS 9.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "xiaomi2",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "dummy3",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },{
+        "deviceType": "iphone4",
+        "platform": "iOS 9.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "xiaomi5",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "dummy6",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "dummy7",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },{
+        "deviceType": "iphone",
+        "platform": "iOS 9.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "xiaomi8",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "dummy9",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "dummy10",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },{
+        "deviceType": "iphone11",
+        "platform": "iOS 9.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "xiaomi12",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      }
+    ]
+   }
+  }
+ 

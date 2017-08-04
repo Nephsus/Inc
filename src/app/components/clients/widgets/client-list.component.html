@@ -1,0 +1,52 @@
+<div class="table-responsive" >
+                <div id="DataTables_Table_0_wrapper" class="dataTables_wrapper form-inline dt-bootstrap">
+                    <div class="html5buttons"><div class="dt-buttons btn-group">
+                        <a class="btn btn-default buttons-copy buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>Copy</span></a>
+                        <a class="btn btn-default buttons-csv buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>CSV</span></a>
+                        <a class="btn btn-default buttons-excel buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>Excel</span></a>
+                        <a class="btn btn-default buttons-pdf buttons-html5" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>PDF</span></a>
+                        <a class="btn btn-default buttons-print" tabindex="0" aria-controls="DataTables_Table_0" href="#"><span>Print</span></a></div></div>
+                        <div class="dataTables_info" id="DataTables_Table_0_info" role="status" aria-live="polite">Dispositivos Relacionados</div>
+                <table class="table table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
+                            <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 181px;">Tipo de Dispositivo</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 226px;">Plataforma</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 204px;">Fecha Alta</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 154px;">Fecha Última Comprobación</th></tr>
+                            </thead>
+                            <tbody>   
+                                <tr class="gradeA odd" role="button" *ngFor="let device of devicesRegistered; let i = index"
+                                (click)="selectedDevice(device, i)" [ngClass]="{'table-selected-row': i === highlightedRow}">
+                                    <td class="sorting_1">{{device.deviceType}}</td>
+                                    <td>{{device.platform}}</td>
+                                    <td>{{device.dischargeDate}}</td>
+                                    <td>{{device.lastCheckDate}}</td>
+                                </tr>
+                        </tbody>
+                    <tfoot>
+                    <tr><th rowspan="1" colspan="1">Tipo de Dispositivo</th><th rowspan="1" colspan="1">Plataforma</th><th rowspan="1" colspan="1">Fecha Alta</th><th rowspan="1" colspan="1">Fecha Última Comprobación</th></tr>
+                    </tfoot>
+                    </table>
+                        <div class="dataTables_paginate paging_simple_numbers" id="DataTables_Table_0_paginate">
+                            <ul class="pagination">
+                                <li class="paginate_button previous disabled" id="DataTables_Table_0_previous">
+                                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="0" tabindex="0">Previous</a>
+                                </li>
+                                <li class="paginate_button active">
+                                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="1" tabindex="0">1</a>
+                                </li>
+                                <li class="paginate_button ">
+                                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="2" tabindex="0">2</a>
+                                </li>
+                                <li class="paginate_button ">
+                                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="3" tabindex="0">3</a>
+                                </li>
+                                <li class="paginate_button next" id="DataTables_Table_0_next">
+                                    <a href="#" aria-controls="DataTables_Table_0" data-dt-idx="4" tabindex="0">Next</a>
+                                </li>
+                            </ul>
+                        </div>
+                </div>
+</div>
+       

@@ -1,0 +1,46 @@
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="ibox float-e-margins ">
+        
+        
+         <div class="ibox-title">
+              <i class="fa fa-chevron-left btn" (click)="goBack()">Volver</i>
+                      
+              <div class="row" >
+                  <div class="col-md-3 col-md-offset-2"></div>
+                  <div class="col-md-3"><h5>Alta Manual de Dispositivo</h5></div>
+                  <div class="col-md-3"></div>
+             </div>
+         <div class="ibox-content">
+             <div class="row" >
+             
+                    <div class="form-group col-md-6">
+                        <label for="message">Modelo</label>
+                        <input [(ngModel)]="model" type="text" name="model" class="form-control" placeholder="Modelo" required="">
+                        <div *ngIf="modelInvalid" style="color: red">Required</div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="platform">Plataforma</label>
+                       <!-- <input type="text" name="platform" class="form-control" placeholder="Plataforma" required="">-->
+                        <select [(ngModel)]="platform" class="form-control" id="platform" required="">
+                            <option></option>
+                            <option>Android 4+</option>
+                            <option>iOS 8+</option>
+                        </select>
+                        <div *ngIf="platformInvalid" style="color: red">Required</div>                   
+                    </div>
+
+             </div>
+            <div class="row" >
+              <div class="form-group col-md-12">
+                        <label for="message">Id Dispositivo</label>
+                        <input type="text" [(ngModel)]="idDevice" name="idDevice" class="form-control" placeholder="Identificador Dispositivo" required="">
+                        <div *ngIf="idDeviceInvalid" style="color: red">Required</div>  
+            </div>
+                     <div class="col-md-12 text-right"><button class="btn btn-primary btn-circle btn-lg" type="button" (click)="resolve()"><i class="fa fa-send"></i></button>
+                         <button class="btn btn-primary btn-circle btn-lg" type="button"><i class="fa fa-times"></i></button>
+                     </div>
+            </div>
+
+           
+         </div>
+</div>

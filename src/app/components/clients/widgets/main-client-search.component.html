@@ -1,0 +1,21 @@
+ <div class="ibox float-e-margins">
+         <div class="ibox-title">
+                            <h5>Buscador de Clientes <small>Introduzca el código de usuario</small></h5>
+                           
+         </div>
+             <div class="ibox-content">  
+                <ng-template functional-error></ng-template>            
+                <clientsearch  (devicesLauncherSearch) = "launchDeviceService($event)"
+                               (reset) = "reset()">
+                </clientsearch>
+
+               <!-- <div id="wrapperContent" *ngIf="devicesResponse !== undefined">-->
+                <div id="wrapperContent" *ngIf="showResponse">
+                <p *ngIf="devicesResponse">Usuario encontrado con nombre {{devicesResponse.user.name}} {{devicesResponse.user.apellidos}} 
+                    
+                </p>
+                <!--<clientlist  *ngIf="devicesResponse" [(devicesRegistered)] = "devicesResponse.devices"></clientlist>-->
+                <infinite-scroll-list [codeUser]="codeUser"></infinite-scroll-list>
+               <!-- <clientlistactions (deleteDevice)="launchDeleteDevice($event)"  ></clientlistactions>-->
+               
+                </div>

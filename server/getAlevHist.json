@@ -1,0 +1,67 @@
+{
+  "headerData": {
+    "pagination": {
+      "paginationflag": false,
+      "paginationKey":""
+    }
+  },
+  "alertPushHistoryOutputType": {
+    "user": {
+      "lastName": "CIVANTOS HUESO ",
+      "documentID": "77777777F",
+      "persNum": "12121212",
+      "name": "MARIA",
+      "code": "77777777F"
+    },
+    "alertHistPush": [
+      {
+        "alevsecu": "235",
+        "destiny": "0982e2c7-3d47-441a-813e-afc065819b55",
+        "sendDate": "20170720",
+        "sendTime": "858",
+        "channel": "P",
+        "body": "{\"to\":\"cH3EiIiKoAg:APA91bFc_uMWuc7aD22EAhf6P3UkJmeO5cF_qFrSFD3cA6kvF7Q6XadHv2p2Bc3JnhD5MqDqs9GeUnmGWQ1nb5lNU5uPSOhvDNdKveTYwRDcMyRJMITzeSV_GQP2rwdL3fWp1sEy2ETN\",\"priority\":\"high\",\"notification\":{\"body\":\"Notificación pendiente de itecban1500533881888\",\"title\":\"Itecban Mobile\",\"sound\":\"Default\"},\"data\":{\"url\":\"http://localhost:8080/alarmasmultithread/walapsandbox/notifications?key=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDA2MjAyODEsInN1YiI6IlB1c2ggTm90aWZpY2F0aW9uIiwiaXNzIjoiUHVzaCBJdGVjYmFuIFNlcnZpY2UiLCJhdWQiOiJJdGVjYmFuIE1vYmlsZSIsImluZm9ybWF0aW9uIjp7IlNFQ1VFTkNJQSI6IjIzNSIsIkRFVklDRV9JRCI6IjA5ODJlMmM3LTNkNDctNDQxYS04MTNlLWFmYzA2NTgxOWI1NSJ9fQ.R32EYa85qkjhkvhtZqjDg1bjI_uI-0I829gklpeVM9M 1500533881888\"}}",
+        "response": "{\"multicast_id\":5225791834532578412,\"success\":1,\"failure\":0,\"canonical_ids\":0,\"results\":[{\"message_id\":\"0:1500533884533611%ae8e8e4fae8e8e4f\"}]}",
+        "readDate": "20170720",
+        "readTime": "1508",
+        "read": false
+      },
+      {
+        "alevsecu": "236",
+        "destiny": "0982e2c7-3d47-441a-813e-afc065819b55",
+        "sendDate": "20170720",
+        "sendTime": "858",
+        "channel": "P",
+        "body": "{\"to\":\"cH3EiIiKoAg:APA91bFc_uMWuc7aD22EAhf6P3UkJmeO5cF_qFrSFD3cA6kvF7Q6XadHv2p2Bc3JnhD5MqDqs9GeUnmGWQ1nb5lNU5uPSOhvDNdKveTYwRDcMyRJMITzeSV_GQP2rwdL3fWp1sEy2ETN\",\"priority\":\"high\",\"notification\":{\"body\":\"Notificación pendiente de itecban1500533881888\",\"title\":\"Itecban Mobile\",\"sound\":\"Default\"},\"data\":{\"url\":\"http://localhost:8080/alarmasmultithread/walapsandbox/notifications?key=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDA2MjAyODEsInN1YiI6IlB1c2ggTm90aWZpY2F0aW9uIiwiaXNzIjoiUHVzaCBJdGVjYmFuIFNlcnZpY2UiLCJhdWQiOiJJdGVjYmFuIE1vYmlsZSIsImluZm9ybWF0aW9uIjp7IlNFQ1VFTkNJQSI6IjIzNSIsIkRFVklDRV9JRCI6IjA5ODJlMmM3LTNkNDctNDQxYS04MTNlLWFmYzA2NTgxOWI1NSJ9fQ.R32EYa85qkjhkvhtZqjDg1bjI_uI-0I829gklpeVM9M 1500533881888\"}}",
+        "response": "{\"multicast_id\":5225791834532578412,\"success\":1,\"failure\":0,\"canonical_ids\":0,\"results\":[{\"message_id\":\"0:1500533884533611%ae8e8e4fae8e8e4f\"}]}",
+        "readDate": "20170720",
+        "readTime": "1508",
+        "read": false
+      },
+      {
+        "alevsecu": "237",
+        "destiny": "0982e2c7-3d47-441a-813e-afc065819b55",
+        "sendDate": "20170720",
+        "sendTime": "858",
+        "channel": "P",
+        "body": "{\"to\":\"cH3EiIiKoAg:APA91bFc_uMWuc7aD22EAhf6P3UkJmeO5cF_qFrSFD3cA6kvF7Q6XadHv2p2Bc3JnhD5MqDqs9GeUnmGWQ1nb5lNU5uPSOhvDNdKveTYwRDcMyRJMITzeSV_GQP2rwdL3fWp1sEy2ETN\",\"priority\":\"high\",\"notification\":{\"body\":\"Notificación pendiente de itecban1500533881888\",\"title\":\"Itecban Mobile\",\"sound\":\"Default\"},\"data\":{\"url\":\"http://localhost:8080/alarmasmultithread/walapsandbox/notifications?key=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDA2MjAyODEsInN1YiI6IlB1c2ggTm90aWZpY2F0aW9uIiwiaXNzIjoiUHVzaCBJdGVjYmFuIFNlcnZpY2UiLCJhdWQiOiJJdGVjYmFuIE1vYmlsZSIsImluZm9ybWF0aW9uIjp7IlNFQ1VFTkNJQSI6IjIzNSIsIkRFVklDRV9JRCI6IjA5ODJlMmM3LTNkNDctNDQxYS04MTNlLWFmYzA2NTgxOWI1NSJ9fQ.R32EYa85qkjhkvhtZqjDg1bjI_uI-0I829gklpeVM9M 1500533881888\"}}",
+        "response": "{\"multicast_id\":5225791834532578412,\"success\":1,\"failure\":0,\"canonical_ids\":0,\"results\":[{\"message_id\":\"0:1500533884533611%ae8e8e4fae8e8e4f\"}]}",
+        "readDate": "20170720",
+        "readTime": "1508",
+        "read": false
+      },
+      {
+        "alevsecu": "238",
+        "destiny": "0982e2c7-3d47-441a-813e-afc065819b55",
+        "sendDate": "20170720",
+        "sendTime": "858",
+        "channel": "P",
+        "body": "{\"to\":\"cH3EiIiKoAg:APA91bFc_uMWuc7aD22EAhf6P3UkJmeO5cF_qFrSFD3cA6kvF7Q6XadHv2p2Bc3JnhD5MqDqs9GeUnmGWQ1nb5lNU5uPSOhvDNdKveTYwRDcMyRJMITzeSV_GQP2rwdL3fWp1sEy2ETN\",\"priority\":\"high\",\"notification\":{\"body\":\"Notificación pendiente de itecban1500533881888\",\"title\":\"Itecban Mobile\",\"sound\":\"Default\"},\"data\":{\"url\":\"http://localhost:8080/alarmasmultithread/walapsandbox/notifications?key=eyJhbGciOiJIUzI1NiJ9.eyJleHAiOjE1MDA2MjAyODEsInN1YiI6IlB1c2ggTm90aWZpY2F0aW9uIiwiaXNzIjoiUHVzaCBJdGVjYmFuIFNlcnZpY2UiLCJhdWQiOiJJdGVjYmFuIE1vYmlsZSIsImluZm9ybWF0aW9uIjp7IlNFQ1VFTkNJQSI6IjIzNSIsIkRFVklDRV9JRCI6IjA5ODJlMmM3LTNkNDctNDQxYS04MTNlLWFmYzA2NTgxOWI1NSJ9fQ.R32EYa85qkjhkvhtZqjDg1bjI_uI-0I829gklpeVM9M 1500533881888\"}}",
+        "response": "{\"multicast_id\":5225791834532578412,\"success\":1,\"failure\":0,\"canonical_ids\":0,\"results\":[{\"message_id\":\"0:1500533884533611%ae8e8e4fae8e8e4f\"}]}",
+        "readDate": "20170720",
+        "readTime": "1508",
+        "read": false
+      }
+    ]
+  }
+}

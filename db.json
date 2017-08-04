@@ -1,0 +1,222 @@
+{
+  "getStadisticsResponse": {
+  
+  "statisticsServiceOutputType": 
+    { "lineChartLabels" : ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre" , "Octubre", "Noviembre", "Diciembre"],
+      "lineChartData": [
+        {
+          "data": [
+            0,
+            33,
+            44,
+            81,
+            56,
+            55,
+            40,
+            80,
+            999,
+            230,
+            67,
+            68
+          ],
+          "label": "Notificaciones email"
+        },
+        {
+          "data": [
+            0,
+            48,
+            40,
+            60,
+            86,
+            27,
+            90,
+            80,
+            1200,
+            50,
+            67,
+            78
+          ],
+          "label": "Notificaciones sms"
+        },
+        {
+          "data": [
+            0,
+            48,
+            77,
+            77,
+            100,
+            27,
+            40,
+            80,
+            10,
+            150,
+            50,
+            40
+          ],
+          "label": "Notificaciones push"
+        }
+      ]
+    }
+  },
+  "getDevices" : {
+     "headerData":{
+             "pagination":{
+                      "paginationFlag" : "true", 
+                      "paginationKey":"2" 
+                        }
+                   },
+  "registeredDevicesOutputType": {
+    "user": {
+      "code": "27047709",
+      "name": "David",
+      "lastName": "Cava Jiménez",
+      "documentID": "30966054G"
+    },
+    "devicesRegistered": [
+      {
+        "deviceType": "iphone1",
+        "platform": "iOS 9.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "xiaomi2",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "dummy3",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },{
+        "deviceType": "iphone4",
+        "platform": "iOS 9.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "xiaomi5",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "dummy6",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "dummy7",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },{
+        "deviceType": "iphone",
+        "platform": "iOS 9.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "xiaomi8",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "dummy9",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "dummy10",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },{
+        "deviceType": "iphone11",
+        "platform": "iOS 9.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "xiaomi12",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      }
+    ]
+   }
+  },
+  "getEmployeeResponse": {"name" :"Herminio Minguela", "rol":"OPERADOR","terminal":"4500"},
+
+   "getStadisticsResponseFilter":{ "statisticsServiceOutputType":{"monthFilter":[{"key":"012017","value":"Enero-17"},{"key":"022017","value":"Febrero-17"},{"key":"032017","value":"Marzo-17"},{"key":"042017","value":"Abril-17"},{"key":"052017","value":"Mayo-17"},{"key":"062017","value":"Junio-17"},{"key":"072017","value":"Julio-17"}],"alarmTypes":[{"key":"1","value":"1.Saldo en Cuenta"},{"key":"2","value":"2.Abono en su Cuenta"},{"key":"3","value":"3.Cargo en su Cuenta"},{"key":"4","value":"4.Cuota Préstamo"},{"key":"5","value":"5.Abono de Nómina"},{"key":"6","value":"6.Confirmación Saldo"},{"key":"8","value":"8.Liquidación Tarjeta Crédito"},{"key":"9","value":"9.Ingreso por Transferencia del Extranjero"},{"key":"10","value":"10.Pago de Recibos"},{"key":"11","value":"11.Nuevo Comunicado Buzón Virtual"},{"key":"12","value":"12.Próxima Cuota de Préstamo"},{"key":"991","value":"991.Cheque Pendiente"},{"key":"992","value":"992.Recibo Pendiente"},{"key":"993","value":"993.Abono Pendiente"},{"key":"994","value":"994.Transferencia a su favor"},{"key":"995","value":"995.Abono Pendiente Por error de Domiciliación"},{"key":"996","value":"996.Alta Reclamación Cajero"},{"key":"997","value":"997.Alta Nuevo Cajero"},{"key":"998","value":"998.Error Domiciliación"},{"key":"999","value":"999.Falta de Saldo Recibo"}]},"statisticsServiceFilterOutputType":{"monthFilter":[{"key":"012017","value":"Enero-17"},{"key":"022017","value":"Febrero-17"},{"key":"032017","value":"Marzo-17"},{"key":"042017","value":"Abril-17"},{"key":"052017","value":"Mayo-17"},{"key":"062017","value":"Junio-17"},{"key":"072017","value":"Julio-17"}],"alarmTypes":[{"key":"1","value":"1.Saldo en Cuenta"},{"key":"2","value":"2.Abono en su Cuenta"},{"key":"3","value":"3.Cargo en su Cuenta"},{"key":"4","value":"4.Cuota Préstamo"},{"key":"5","value":"5.Abono de Nómina"},{"key":"6","value":"6.Confirmación Saldo"},{"key":"8","value":"8.Liquidación Tarjeta Crédito"},{"key":"9","value":"9.Ingreso por Transferencia del Extranjero"},{"key":"10","value":"10.Pago de Recibos"},{"key":"11","value":"11.Nuevo Comunicado Buzón Virtual"},{"key":"12","value":"12.Próxima Cuota de Préstamo"},{"key":"991","value":"991.Cheque Pendiente"},{"key":"992","value":"992.Recibo Pendiente"},{"key":"993","value":"993.Abono Pendiente"},{"key":"994","value":"994.Transferencia a su favor"},{"key":"995","value":"995.Abono Pendiente Por error de Domiciliación"},{"key":"996","value":"996.Alta Reclamación Cajero"},{"key":"997","value":"997.Alta Nuevo Cajero"},{"key":"998","value":"998.Error Domiciliación"},{"key":"999","value":"999.Falta de Saldo Recibo"}]}},
+
+   "getSendAlarmsResponse": {"sendAlarmsOutputType":{ "sendSms":120, "sendPush": 380, "sendEmail": 8000 }},
+
+  "getDevices2" : {
+     "headerData":{
+             "pagination":{
+                      "paginationFlag" : "true", 
+                      "paginationKey":"3" 
+                        }
+                   },
+  "registeredDevicesOutputType": {
+    "user": {
+      "code": "27047709",
+      "name": "David",
+      "lastName": "Cava Jiménez",
+      "documentID": "30966054G"
+    },
+    "devicesRegistered": [
+      {
+        "deviceType": "ONEPLUS",
+        "platform": "iOS 9.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "ONEPLUS2222",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      }
+    ]
+   }
+  },
+   "getDevices3" : {
+     "headerData":{
+             "pagination":{
+                      "paginationFlag" : "false", 
+                      "paginationKey":"3" 
+                        }
+                   },
+  "registeredDevicesOutputType": {
+     "user": {
+      "code": "27047709",
+      "name": "David",
+      "lastName": "Cava Jiménez",
+      "documentID": "30966054G"
+    },
+    "devicesRegistered": [
+      {
+        "deviceType": "ONEPLUS",
+        "platform": "iOS 9.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      },
+      {
+        "deviceType": "ONEPLUS2222",
+        "platform": "Android 7.0",
+        "dischargeDate": "10/10/2017",
+        "lastCheckDate": "11/02/2017"
+      }
+    ]
+   }
+  }
+   
+
+}

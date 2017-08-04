@@ -1,0 +1,23 @@
+
+<div id='infinite-div'  style="width:100%; height:300px; overflow: auto;">
+<table class="table table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
+                            <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 181px;">Tipo de Dispositivo</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 226px;">Plataforma</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 204px;">Fecha Alta</th><th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 154px;">Fecha Última Comprobación</th></tr>
+                            </thead>
+                            <tbody>
+                              <tr class="gradeA odd" *ngFor="let item of itemResults$|async" [style.height]="itemHeight + 'px'">
+                                    <td style="width: 254px;">{{item.deviceType}}</td>
+                                    <td style="width: 318px;">{{item.platform}}</td>
+                                    <td style="width: 287px;"> {{item.dischargeDate}}</td>
+                                    <td>{{item.lastCheckDate}}</td>
+                                </tr>
+                                <tr *ngIf="showLoading == true" [style.height]="itemHeight + 'px'">
+                                            <td><img src="assets/img/rolling.gif" /></td>
+                                </tr>
+                            </tbody>
+</table>
+   </div>
+
+
