@@ -29,7 +29,7 @@ constructor( private _http:Http, private _router : Router, private _enviorement 
             return this._http.get(url,  { search: params } )
                       .map( resp =>{
                             let body = resp.json();
-                             if (body.headerData && body.headerData.errorData){
+                             if (body.headerData && body.headerData.errorData && body.headerData.errorData.errorType==='T'){
                                 this._enviorement.technicalError = body.headerData.errorData;
                                 throw new Error(body.headerData.errorData.errorText);
                              }else{

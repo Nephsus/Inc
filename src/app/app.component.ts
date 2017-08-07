@@ -2,7 +2,7 @@ import { Component, AfterViewInit,  OnInit, OnDestroy, ComponentFactoryResolver,
 
 import { EnviorementDashboardProvider } from "./services/enviorement-dashboard.provider";
 import { EmployeeService } from "./services/employee.services";
-import { SuccessData } from "./models/services/generics/successdata";
+import { ResultData } from "./models/services/generics/ResultData";
 import { Subscription } from 'rxjs/Subscription';
 import { ModalOperation } from "./components/common/modal-operation.component";
 import { FunctionalSuccessDirective } from "./directives/functional-success.directive";
@@ -39,13 +39,13 @@ export class AppComponent implements AfterViewInit{
 
 ngOnInit(){
 
- this.subscriptionSuccess = this._enviorementDashboard.receiveSuccessAction.subscribe( ( successdata : SuccessData ) =>{
+ this.subscriptionSuccess = this._enviorementDashboard.receiveSuccessAction.subscribe( ( resultdata : ResultData ) =>{
                      let componentFactory = this._componentFactoryResolver.resolveComponentFactory(ModalOperation);
                      this.viewContainerRef = this.directiveModal.viewContainerRef;
                      this.viewContainerRef.clear();
                      let component = this.viewContainerRef.createComponent(componentFactory);
                      this.modalComponent =  (<ModalOperation>component.instance); //Casting a saco paco
-                     this.modalComponent.successdata = successdata;
+                     this.modalComponent.successdata = resultdata;
   } );
 
 this.subscriptionClose = this._enviorementDashboard.receiveCloseAction.subscribe( () =>{

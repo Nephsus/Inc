@@ -8,6 +8,9 @@ import { RegisteredDevicesOutputType } from "../../../models/services/devices/Re
 import { DevicesRegistered } from '../../../models/services/devices/RegisteredDevicesOutputType';
 import { ClientService} from "../services/client.services";
 import { environment } from '../../../../environments/environment';
+import { EnviorementDashboardProvider } from "../../../services/enviorement-dashboard.provider";
+import { ResultData } from "../../../models/services/generics/ResultData";
+import { ResultDataType } from "../../../models/services/generics/ResultDataType";
 
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/filter';  
@@ -141,7 +144,9 @@ export class InfiniteScrollListComponent implements AfterViewInit {
 
 
   
-  constructor(private _request: RequestWrapperService, private http: Http, private elementRef: ElementRef, private clientService : ClientService){ 
+  constructor(private _request: RequestWrapperService, private http: Http, 
+              private elementRef: ElementRef, private clientService : ClientService,
+             private _enviorementDashboard : EnviorementDashboardProvider){ 
       
   } 
 
@@ -263,6 +268,13 @@ private extractData(res: any) {
     let body = res;
     
 
+     if (body.headerData && body.headerData.errorData){
+        let rel = new ResultData( ResultDataType.Success, "Error", body.headerData.errorData.errorText, "", "Close");
+
+        this._enviorementDashboard.receiveSuccessAction.next( rel );
+        return {};
+     }
+
     if( body.headerData  && (body.headerData.pagination.paginationFlag ==="true" || body.headerData.pagination.paginationFlag ===true) ) {
       this.lastPaginationKey = this.paginationKey;
       this.paginationKey = `/${body.headerData.pagination.paginationKey}`;
@@ -271,6 +283,7 @@ private extractData(res: any) {
         this.paginationFlag = false;
     }
 
+   
     if(body.registeredDevicesOutputType && body.registeredDevicesOutputType.user )
         this.clientService.setUser( RegisteredDevicesOutputType.createUserfromJson (body.registeredDevicesOutputType.user ) );
 

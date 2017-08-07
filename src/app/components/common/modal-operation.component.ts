@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Output } from '@angular/core';
 
 import { EnviorementDashboardProvider } from '../../services/enviorement-dashboard.provider'
-import { SuccessData } from '../../models/services/generics/successdata';
+import { ResultData } from '../../models/services/generics/ResultData';
 
 @Component({
    
@@ -9,7 +9,7 @@ import { SuccessData } from '../../models/services/generics/successdata';
 })
 export class ModalOperation {
 
-    public successdata: SuccessData;
+    public successdata: ResultData;
 
     constructor(public _enviorementDashboard : EnviorementDashboardProvider){}
 

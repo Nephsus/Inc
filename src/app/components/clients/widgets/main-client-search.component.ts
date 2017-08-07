@@ -34,7 +34,8 @@ launchDeviceService( codeUser: string ){
 
   this.codeUser = codeUser;
   this.showResponse = true;
-  
+  this._clientNameStream$.next(codeUser);
+
 }
 
 launchDeleteDevice( ){

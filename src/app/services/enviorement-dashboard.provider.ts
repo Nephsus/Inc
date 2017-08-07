@@ -6,7 +6,7 @@ import { Device } from "../models/services/enviorements/device";
 import { User } from "../models/services/enviorements/user";
 import { Employee } from "../models/services/enviorements/employee";
 import { ErrorData } from "../models/services/generics/errordata";
-import { SuccessData } from "../models/services/generics/successdata";
+import { ResultData } from "../models/services/generics/ResultData";
 import { EmployeeService } from "./employee.services";
 
 
@@ -21,12 +21,12 @@ export class EnviorementDashboardProvider{
 
 
     public technicalError : ErrorData;
-    public successData : SuccessData;
+    public successData : ResultData;
 
     // Observables
      public receiveErrorAction = new Subject<ErrorData>();
     // Observables
-     public receiveSuccessAction = new Subject<SuccessData>();
+     public receiveSuccessAction = new Subject<ResultData>();
      public receiveCloseAction = new Subject<void>();
 
      receiveErrorAction$ = this.receiveErrorAction.asObservable();

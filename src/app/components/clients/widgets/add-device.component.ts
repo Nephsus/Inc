@@ -4,7 +4,8 @@ import { EnviorementDashboardProvider } from "../../../services/enviorement-dash
 import { DevicesAvailableService } from "../../../services/devices-available.services";
 import { ClientService } from "../services/client.services";
 import { FunctionalSuccessDirective } from "../../../directives/functional-success.directive";
-import { SuccessData } from "../../../models/services/generics/successdata";
+import { ResultData } from "../../../models/services/generics/ResultData";
+import { ResultDataType } from "../../../models/services/generics/ResultDataType";
 
 
 @Component({
@@ -60,7 +61,7 @@ resolve(){
                                                     this.platform  )
                                  .subscribe( resp => 
 
-                                      this._enviorementDashboard.receiveSuccessAction.next( new SuccessData(resp.status, resp.description) )
+                                      this._enviorementDashboard.receiveSuccessAction.next( new ResultData( ResultDataType.Success, resp.status, resp.description, undefined, "Close") )
                                  );
 
 }   
