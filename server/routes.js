@@ -6,6 +6,7 @@ var data = {
     getStadisticsResponse: JSON.parse(fs.readFileSync(ACM_folder+'/getStadisticsResponse.json', 'utf8')),
     getDevices: JSON.parse(fs.readFileSync(ACM_folder+'/getDevices.json', 'utf8')),
     getDevicesError: JSON.parse(fs.readFileSync(ACM_folder+'/getDevicesError.json', 'utf8')),
+    getUserWithoutDevices: JSON.parse(fs.readFileSync(ACM_folder+'/getUserWithoutDevices.json', 'utf8')),
     getDevices2: JSON.parse(fs.readFileSync(ACM_folder+'/getDevices2.json', 'utf8')),
     getDevices3: JSON.parse(fs.readFileSync(ACM_folder+'/getDevices3.json', 'utf8')),
     getEmployeeResponse: JSON.parse(fs.readFileSync(ACM_folder+'/getEmployeeResponse.json', 'utf8')),
@@ -30,7 +31,10 @@ module.exports = function (app) {
             if (req.params.userCode === 'ddd')
                 res.send(data.getDevicesError);
             else
-            res.send(data.getDevices);
+                if (req.params.userCode === 'aaa')
+                    res.send(data.getUserWithoutDevices);
+                else
+                    res.send(data.getDevices);
         else
             if( req.params.paginationKey == 2)
                 res.send(data.getDevices2);

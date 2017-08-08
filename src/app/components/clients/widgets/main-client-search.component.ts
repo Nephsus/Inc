@@ -24,6 +24,9 @@ export class MainClientSearch implements OnDestroy{
 
  private codeUser : string;
 
+  @ViewChild(InfiniteScrollListComponent)
+    private infiniteScrollListComponent: InfiniteScrollListComponent;
+
 
  private _clientNameStream$: Subject<string> = new Subject<string>();
  public showResponse:boolean = false;
@@ -32,10 +35,15 @@ constructor( private devicesAvailableService : DevicesAvailableService,  private
 
 launchDeviceService( codeUser: string ){
 
+
+
+
+  
   this.codeUser = codeUser;
   this.showResponse = true;
-  this._clientNameStream$.next(codeUser);
-
+  //this._clientNameStream$.next(codeUser);
+  this.infiniteScrollListComponent.codeUser = codeUser;
+  this.infiniteScrollListComponent.start();
 }
 
 launchDeleteDevice( ){
@@ -52,7 +60,7 @@ launchDeleteDevice( ){
  }
 
 subscribeAndRecovery(): void {
-    this._clientNameStream$.switchMap( 
+    this._clientNameStream$.asObservable().switchMap( 
                                 (codeUser : string) => {    
                                     return this.executeQuery(codeUser);  }  )
                                         .subscribe( res => {

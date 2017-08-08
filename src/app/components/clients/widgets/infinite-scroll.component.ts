@@ -26,7 +26,9 @@ import {flatMap} from "lodash";
 
 @Component({
   selector: 'infinite-scroll-list',
-  template: `<div id='infinite-div'  style="width:100%; height:300px; overflow: auto;" #infinitediv>
+  template: `<p *ngIf="this.clientService.getUser()">Usuario encontrado con nombre {{this.clientService.getUser().getName()}} {{this.clientService.getUser().getLastName()}}  
+                </p>
+                <div id='infinite-div'  style="width:100%; height:300px; overflow: auto;" #infinitediv>
 <table class="table table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
                             <thead>
                             <tr role="row">
@@ -59,23 +61,23 @@ import {flatMap} from "lodash";
             (click)="clickAction( i + 1 )"  ><i class="fa fa-check"></i>{{action}}</a>-->
 
             <a class="btn btn-primary btn-rounded" 
-            style="margin-right: 5px;" 
+            style="margin-right: 5px;" [class.disabled]="disableOneButton"
             (click)="clickAction( 1 )"  ><i class="fa fa-eye"></i> </a>
 
             <a class="btn btn-primary btn-rounded" 
-            style="margin-right: 5px;" 
+            style="margin-right: 5px;"  [class.disabled]="disableSecondButton"
             (click)="clickAction( 2 )"  ><i class="fa fa-minus"></i> </a>
 
             <a class="btn btn-primary btn-rounded" 
-            style="margin-right: 5px;" 
+            style="margin-right: 5px;"  [class.disabled]="disableThirdButton"
             (click)="clickAction( 3 )"  ><i class="fa fa-send"></i> </a>
 
             <a class="btn btn-primary btn-rounded" 
-            style="margin-right: 5px;" 
+            style="margin-right: 5px;"  [class.disabled]="disableFourButton"
             (click)="clickAction( 4 )"  ><i class="fa fa-plus"></i> </a>
 
             <a class="btn btn-primary btn-rounded" 
-            style="margin-right: 5px;" 
+            style="margin-right: 5px;" [class.disabled]="disableFiveButton"
             (click)="clickAction( 5 )"  ><i class="fa fa-book"></i> </a>
 
     </div>
@@ -116,7 +118,8 @@ export class InfiniteScrollListComponent implements AfterViewInit {
   private pageByManual$ = new BehaviorSubject(1);
   private itemHeight = 40;
   private numberOfItems = 10; 
-  @Input()
+  
+  //@Input()
   public codeUser : string;
 
   @ViewChild("infinitediv") tracker: ElementRef;
@@ -132,6 +135,15 @@ export class InfiniteScrollListComponent implements AfterViewInit {
 
   public showLoading : boolean = false;
   public devicesResponse : RegisteredDevicesOutputType;
+
+
+  private disableOneButton : boolean = true;
+  private disableSecondButton : boolean = true;
+  private disableThirdButton : boolean = true;
+  private disableFourButton : boolean = true;
+  private disableFiveButton : boolean = true;
+
+
 
    listActions : [string] = ["Vizualizar" , "Eliminar", "Envío Manual", "Añadir Dispositivo" , "Consultar Historial" ];
 
@@ -153,6 +165,12 @@ export class InfiniteScrollListComponent implements AfterViewInit {
   selectedDevice( device : DevicesRegistered, i: number){
         this.highlightedRow = i;
         this.clientService.setSelectedDevice( device );
+
+        this.disableOneButton  = false;
+        this.disableSecondButton  = false;
+        this.disableThirdButton = false;
+        this.disableFourButton  = false;
+        this.disableFiveButton  = false;
    }
 
   ngAfterViewInit(){
@@ -254,7 +272,7 @@ this.itemResults$ = this.pageToLoad$
        return flatMap(resp);
     })
 
-    this.start();
+    //this.start();
      
   }
 
@@ -269,11 +287,13 @@ private extractData(res: any) {
     
 
      if (body.headerData && body.headerData.errorData){
-        let rel = new ResultData( ResultDataType.Success, "Error", body.headerData.errorData.errorText, "", "Close");
+        let rel = new ResultData( ResultDataType.Error, "Error", body.headerData.errorData.errorText, "", "Close");
 
         this._enviorementDashboard.receiveSuccessAction.next( rel );
         return {};
      }
+
+      
 
     if( body.headerData  && (body.headerData.pagination.paginationFlag ==="true" || body.headerData.pagination.paginationFlag ===true) ) {
       this.lastPaginationKey = this.paginationKey;
@@ -284,9 +304,10 @@ private extractData(res: any) {
     }
 
    
-    if(body.registeredDevicesOutputType && body.registeredDevicesOutputType.user )
+    if(body.registeredDevicesOutputType && body.registeredDevicesOutputType.user ){
         this.clientService.setUser( RegisteredDevicesOutputType.createUserfromJson (body.registeredDevicesOutputType.user ) );
-
+        this.disableFourButton = false;
+    }
     return RegisteredDevicesOutputType.createArrayDevices(body.registeredDevicesOutputType) || {};
   }
 
@@ -294,7 +315,11 @@ private extractData(res: any) {
 
 
   public start(){
-    
+    this.cache2 = [];
+    this.paginationKey = "";
+    this.paginationFlag = false;
+    this.lastPaginationKey  ="!";
+
     this.itemResults$.subscribe( 
        res => { this.cache2 = this.cache2.concat(res);}
      );
@@ -322,5 +347,7 @@ private extractData(res: any) {
 
     }
    }
+  
+
   
 }

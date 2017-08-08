@@ -4,12 +4,15 @@
                 <div class="modal-content animated fadeIn">
                   <div class="modal-header">
                   <button type="button" class="close" (click)="onCloseEvent()" data-dismiss="modal"><span aria-hidden="true">×</span><span class="sr-only">Close</span></button>
-                  <i class="fa fa-check modal-icon"></i>
+                  <i *ngIf="successdata.messageType === 0"  class="fa fa-check modal-icon"></i>
+                  <i *ngIf="successdata.messageType === 1"  class="fa fa-ban modal-icon"></i>
+                  <i *ngIf="successdata.messageType === 2"  class="fa fa-exclamation-triangle modal-icon"></i>
                   <h4 class="modal-title">{{successdata.successTitle}}</h4>
                    <small>{{successdata.successText}}</small>
                   </div>
                   <div class="modal-footer">
-                      <button type="button" (click)="onCloseEvent()" class="btn btn-primary">Close</button>
+                      <button type="button"  *ngIf="successdata.titleOK !== ''" (click)="onAcceptEvent()" class="btn btn-primary">{{successdata.titleOK}}</button>
+                      <button type="button"  *ngIf="successdata.titleClose !== ''" (click)="onCloseEvent()" class="btn btn-primary">{{successdata.titleClose}}</button>
                    </div>
                 </div>
           </div>

@@ -2,6 +2,7 @@ import { Component, EventEmitter, Output } from '@angular/core';
 
 import { EnviorementDashboardProvider } from '../../services/enviorement-dashboard.provider'
 import { ResultData } from '../../models/services/generics/ResultData';
+import { ResultDataType } from '../../models/services/generics/ResultDataType';
 
 @Component({
    
@@ -14,8 +15,14 @@ export class ModalOperation {
     constructor(public _enviorementDashboard : EnviorementDashboardProvider){}
 
     onCloseEvent(){
+        
         this._enviorementDashboard.receiveCloseAction.next();
     }
 
+
+     onAcceptEvent(){
+        
+        this._enviorementDashboard.receiveCloseAction.next();
+    }
  
 }

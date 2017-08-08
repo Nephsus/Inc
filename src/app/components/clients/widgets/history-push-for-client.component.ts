@@ -9,6 +9,7 @@ import { AlertHistPush } from '../../../models/services/push/AlertHistPush';
 import { ClientService} from "../services/client.services";
 import { environment } from '../../../../environments/environment';
 
+
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/filter';  
 import 'rxjs/add/operator/debounceTime'; 
@@ -23,7 +24,9 @@ import {flatMap} from "lodash";
 
 @Component({
   selector: 'history-push-for-client',
-  template: `<div class="wrapper wrapper-content animated fadeInRight">
+  template: `
+ 
+  <div class="wrapper wrapper-content animated fadeInRight">
     <div class="ibox float-e-margins ">
          <div class="ibox-title">
               <i class="fa fa-chevron-left btn" (click)="goBack()">Volver</i>
@@ -33,7 +36,25 @@ import {flatMap} from "lodash";
                   <div class="col-md-3"><h5>Historial de Envíos</h5></div>
                   <div class="col-md-3"></div>
              </div>
+
+             
          <div class="ibox-content">
+            <div class="row">
+                 <div class="col-md-5">
+                            <small>Seleccione fecha de Inicio</small>
+                            <ng2-datepicker [(ngModel)]="dateIni" [options]="datePickerOptions"></ng2-datepicker>
+                           
+                    </div>
+                 <div class="col-md-5">
+                            <small>Seleccione fecha de Fin</small>
+                            <ng2-datepicker [(ngModel)]="dateFin" [options]="datePickerOptions" ></ng2-datepicker>
+                           
+                 </div>
+                <div class="col-md-2">
+                            <a class="btn btn-primary btn-rounded" style="margin-right: 1px;"  (click)="launchSearchPush()"  ><i class="fa fa-check"></i>Aceptar</a>    
+                 </div>
+            </div>
+
              <div class="row" >
              <div id='history-div'  style="width:100%; height:300px; overflow: auto;" #historydiv>
                 <table class="table table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
@@ -65,10 +86,9 @@ import {flatMap} from "lodash";
    </div>
    <div class="container-fluid">
     <div class="row" >
-        <a  *ngFor="let action of listActions; let i = index" 
-            class="btn btn-primary btn-rounded" 
+        <a  class="btn btn-primary btn-rounded" 
             style="margin-right: 1px;" 
-            (click)="clickAction( i + 1 )"  ><i class="fa fa-eye"></i></a>
+            (click)="clickActionSeePush()"  ><i class="fa fa-eye"></i></a>
     </div>
 </div>
 </div>
@@ -77,6 +97,15 @@ import {flatMap} from "lodash";
 </div>`
 })
 export class HistoryPushForClient implements AfterViewInit {
+
+  datePickerOptions ={
+    format: "DD-MM-YYYY",
+    autoApply: true,
+    locale: 'es',
+    firstWeekdaySunday: false
+  }
+
+
   public cache : any[] = []; 
   public cache2 : AlertHistPush [] = []; 
   private flatCache : any[] = []; 
@@ -102,6 +131,8 @@ export class HistoryPushForClient implements AfterViewInit {
   @Input() activated: boolean = false;
 
 
+  public dateIni : any;
+  public dateFin : any;
 
    listActions : [string] = ["Vizualizar" ];
 
@@ -130,6 +161,7 @@ export class HistoryPushForClient implements AfterViewInit {
 
 
    goBack() {
+ 
         this.clickGoBack.emit();
    }
 
@@ -244,13 +276,18 @@ private extractData(res: any) {
 
   }
 
-  clickAction( index: number ){
-   if( index === 2){
-        this.deleteRow( );
-    }else{
-        this.clientService.receiveActionEvent( index );
+  clickActionSeePush( ){
+       DatePickerConfiguration.autoApply;
+        window.open('http://www.google.es','_blank');
+       
+   }
 
-    }
+
+   launchSearchPush(){
+        console.log("David Ini" + this.dateIni);
+        console.log("David" + this.dateFin);
+
+
    }
   
 }
