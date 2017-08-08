@@ -277,7 +277,6 @@ private extractData(res: any) {
   }
 
   clickActionSeePush( ){
-       DatePickerConfiguration.autoApply;
         window.open('http://www.google.es','_blank');
        
    }
