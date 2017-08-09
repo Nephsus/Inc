@@ -1,1 +1,10 @@
-{"deleteUserDevicesOutputType":{"numDeletedDevices":1}}
+{
+    "headerData": {
+    "errorData": {
+      "errorText": "NO SE HA ENCONTRADO AL DISPOSITIVO",
+      "errorFlag": false,
+      "errorType": "T"
+    }
+  },
+    
+    "deleteUserDevicesOutputType":{"numDeletedDevices":1}}

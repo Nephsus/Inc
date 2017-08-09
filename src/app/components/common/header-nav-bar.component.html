@@ -1,10 +1,10 @@
 <nav class="navbar navbar-static-top white-bg" role="navigation" style="margin-bottom: 0">
                 <div class="navbar-header">
-                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary " href="#">
+                    <a class="navbar-minimalize minimalize-styl-2 btn btn-primary ">
                     <i class="fa fa-bars"></i> </a>
                        <div class="row" style="margin: 10px 5px 5px 20px;float: left;">
-                           <small><span> Usuario: {{_clientService.getUser()?.getName() || ''}} {{_clientService.getUser()?.getLastName() || ''}}</span> </small><br>
-                           <small><span> Dispositivo:  {{_clientService.getSelectedDevice()?.getDeviceType() }} {{_clientService.getSelectedDevice()?.getPlatform()}}</span></small>
+                           <small><span *ngIf="_clientService.getUser()"> Usuario: {{_clientService.getUser()?.getName() || ''}} {{_clientService.getUser()?.getLastName() || ''}}</span> </small><br>
+                           <small><span *ngIf="_clientService.getSelectedDevice()"> Dispositivo:  {{_clientService.getSelectedDevice()?.getDeviceType() }} {{_clientService.getSelectedDevice()?.getPlatform()}}</span></small>
                        </div>  
                 </div>
                 <ul class="nav navbar-top-links navbar-right">

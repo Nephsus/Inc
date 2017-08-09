@@ -22,7 +22,7 @@ export class ModalOperation {
 
      onAcceptEvent(){
         
-        this._enviorementDashboard.receiveCloseAction.next();
+        this._enviorementDashboard.receiveSuccessAction.next();
     }
  
 }

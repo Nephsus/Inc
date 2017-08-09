@@ -6,7 +6,8 @@ import { StatisticsService } from "../../../services/statistics.services";
 import { StatisticsServiceFilterOutputType } from "../../../models/services/statistics/statisticsservicefilteroutputtype";
 import { StatisticsServiceOutputType }  from "../../../models/services/statistics/statisticsserviceoutputtype";
 import { SendAlarmsOutputType } from "../../../models/services/statistics/sendalarmsoutputtype";
-import { LineChartHistory } from "../widgets/line-chart-history.component";  
+import { LineChartHistory } from "../widgets/line-chart-history.component"; 
+import { ClientService} from "../../clients/services/client.services"; 
 
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 
@@ -43,9 +44,15 @@ public selectedValueAlarm:any;
 
 //public subjectST = new Subject<StatisticsServiceFilterOutputType>();
 
-constructor(private elementRef:ElementRef, private statisticsService: StatisticsService) {
+constructor(private elementRef:ElementRef, private statisticsService: StatisticsService,  public clientService : ClientService) {
 
- this.optionsDatePicker = new DatePickerOptions();
+
+
+clientService.setUser(null);
+clientService.setSelectedDevice(null);
+
+
+this.optionsDatePicker = new DatePickerOptions();
 this.optionsDatePicker.format = 'DD/MM/YYYY';
 
 this.dateSearch='hoy';

@@ -37,7 +37,7 @@ resolve(){
     this._devicesAvailableService.sendPush(this.textPush, this.clientService.getSelectedDevice().getPushToken())
                 .subscribe( resp =>{ 
 
-                                        if (resp.headerData && resp.headerData.errorData){
+                                         if (resp.headerData && resp.headerData.errorData && (resp.headerData.errorData.errorFlag === true)){
                                                this._enviorementDashboard.receiveSuccessAction.next(new ResultData( ResultDataType.Error, "Error", resp.headerData.errorData.errorText, "", "Close"));
                                         }
                                         else

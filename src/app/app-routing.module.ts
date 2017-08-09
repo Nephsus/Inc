@@ -8,6 +8,7 @@ import { TechnicalError } from "./components/common/technical-error.component"
 import { MainStatistics } from "./components/statistics/main/main-statistics.component";
 import { StatisticsResolve} from "./services/statistics-resolve.service";
 import { MainAudit } from "./components/audit/main/main-audit.component";
+import { MainSandBox } from "./components/sandbox/main/main-sandbox.component";
 
 const routes: Routes = [{
     path: "",
@@ -21,6 +22,9 @@ const routes: Routes = [{
 },{ 
     path: "MainAudit",
     component: MainAudit
+},{ 
+    path: "MainSandBox",
+    component: MainSandBox
 },{ 
     path: "technicalError",
     component: TechnicalError

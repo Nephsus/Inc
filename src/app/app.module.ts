@@ -30,6 +30,7 @@ import { FunctionalErrorDirective } from "./directives/functional-error.directi
 import { FunctionalSuccessDirective } from "./directives/functional-success.directive";
 import { ModalOperation } from "./components/common/modal-operation.component";
 import { MainAudit } from "./components/audit/main/main-audit.component";
+import { MainSandBox } from "./components/sandbox/main/main-sandbox.component";
 import { ListEventsAudit } from "./components/audit/widgets/list-events-audit.component";
 import { EmployeeService } from "./services/employee.services";
 import { DatePickerModule } from 'ng2-datepicker';
@@ -46,7 +47,7 @@ import { DatePickerModule } from 'ng2-datepicker';
         MainClient,ClientListActions,ClientListEvents,InfiniteScrollListComponent,
         FunctionalErrorDirective,MainClientSearch,SendPush,
         FunctionalSuccessDirective,HeaderNavBar,MainAudit,ListEventsAudit,ModalOperation,TechnicalError,
-        AddDevice,HistoryPushForClient
+        AddDevice,HistoryPushForClient,MainSandBox
     ],
     entryComponents: [  ModalOperation  ],
     providers: [ RequestWrapperService, StatisticsService,StatisticsResolve, 

@@ -6,6 +6,7 @@ import "rxjs/add/operator/switchMap"
 import { RegisteredDevicesOutputType } from "../models/services/devices/RegisteredDevicesOutputType";
 import { RegisterUserDeviceRequestType } from "../models/services/devices/RegisterUserDeviceRequestType";
 import { DeleteUserDevicesOutputType } from "../models/services/devices/DeleteUserDevicesOutputType";
+import { DeleteUserDevicesResponseType} from "../models/services/devices/DeleteUserDevicesResponseType"
 import { RegisterUserDeviceOutputType } from "../models/services/devices/RegisterUserDeviceOutputType";
 import { SendPushInputType } from "../models/services/devices/SendPushInputType";
 import { SendPushOutputType } from "../models/services/devices/SendPushOutputType";
@@ -31,9 +32,9 @@ export class DevicesAvailableService {
  } 
 
 
-  deleteUserDevice( codeuser : string, deviceId: string) : Observable<DeleteUserDevicesOutputType>{
+  deleteUserDevice( codeuser : string, deviceId: string) : Observable<DeleteUserDevicesResponseType>{
        return this._request.get( environment.baseUrl + environment.intermediateUrl + `/deleteUserDevice/getDevices/${codeuser}/${deviceId}` )
-                              .map( response =>  DeleteUserDevicesOutputType.fromJson(response))
+                              .map( response =>  DeleteUserDevicesResponseType.fromJson(response))
 
   }
   

@@ -1,7 +1,7 @@
 
 import { Observable } from "rxjs/Observable"
 import {BehaviorSubject} from 'rxjs/BehaviorSubject';
-import { AfterViewInit, Component, Input, ElementRef, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, Input, ElementRef, ViewChild, OnDestroy } from '@angular/core';
 import {Http, Response} from "@angular/http";
 import { RequestWrapperService } from "../../../services/request-wrapper.services";
 import { RegisteredDevicesOutputType } from "../../../models/services/devices/RegisteredDevicesOutputType";
@@ -11,6 +11,8 @@ import { environment } from '../../../../environments/environment';
 import { EnviorementDashboardProvider } from "../../../services/enviorement-dashboard.provider";
 import { ResultData } from "../../../models/services/generics/ResultData";
 import { ResultDataType } from "../../../models/services/generics/ResultDataType";
+import { DevicesAvailableService } from '../../../services/devices-available.services';
+
 
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/filter';  
@@ -22,6 +24,7 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/empty';
 import 'rxjs/add/observable/throw';
+import { Subscription } from 'rxjs/Subscription';
 import {flatMap} from "lodash";
 
 @Component({
@@ -112,7 +115,7 @@ import {flatMap} from "lodash";
    </div>`*/
   //templateUrl:"./infinite-scroll.component.html"
 })
-export class InfiniteScrollListComponent implements AfterViewInit {
+export class InfiniteScrollListComponent implements AfterViewInit,OnDestroy {
   public cache : any[] = []; 
   public cache2 : DevicesRegistered [] = []; 
   private flatCache : any[] = []; 
@@ -144,7 +147,7 @@ export class InfiniteScrollListComponent implements AfterViewInit {
   public disableFourButton : boolean = true;
   public disableFiveButton : boolean = true;
 
-
+ private subscriptionOkButton: Subscription;  
 
    listActions : [string] = ["Vizualizar" , "Eliminar", "Envío Manual", "Añadir Dispositivo" , "Consultar Historial" ];
 
@@ -159,7 +162,9 @@ export class InfiniteScrollListComponent implements AfterViewInit {
   
   constructor(private _request: RequestWrapperService, private http: Http, 
               private elementRef: ElementRef, public clientService : ClientService,
-             private _enviorementDashboard : EnviorementDashboardProvider){ 
+             private _enviorementDashboard : EnviorementDashboardProvider,
+              private devicesAvailableService : DevicesAvailableService
+            ){ 
       
   } 
 
@@ -316,10 +321,7 @@ private extractData(res: any) {
 
 
   public start(){
-    this.cache2 = [];
-    this.paginationKey = "";
-    this.paginationFlag = false;
-    this.lastPaginationKey  ="!";
+    this.initialize();
 
     this.itemResults$.subscribe( 
        res => { this.cache2 = this.cache2.concat(res);}
@@ -329,13 +331,45 @@ private extractData(res: any) {
 
 
   public deleteRow( ){
-    
-    this.cache2.splice( this.highlightedRow,1);
 
-    if((this.itemHeight * this.cache2.length + 50 ) < this.tracker.nativeElement.offsetHeight){
-        if( this.paginationFlag )
-	     this.start();		           
-    }
+
+   this._enviorementDashboard.receiveSuccessAction.next( new ResultData( ResultDataType.Information, "Atención", "Va a Eliminar un dispositivo de un usuario. ¿Desea Continuar?", "Sí", "No") );
+
+   
+
+    this.subscriptionOkButton = this._enviorementDashboard.receiveSuccessAction.subscribe( () =>{
+               this.subscriptionOkButton.unsubscribe();
+               this.devicesAvailableService.deleteUserDevice(this.clientService.getUser().getCode(),
+                        this.clientService.getSelectedDevice().getDeviceType() ).subscribe( resp => {
+                            console.error("davvvv" + resp);
+
+                              if (resp.headerData && resp.headerData.errorData && (resp.headerData.errorData.errorFlag === true)){
+                                               this._enviorementDashboard.receiveSuccessAction.next(new ResultData( ResultDataType.Error, "Error", resp.headerData.errorData.errorText, "", "Close"));
+                                        }
+                              else{
+                                            this._enviorementDashboard.receiveSuccessAction.next( new ResultData( ResultDataType.Success, "OK", "Dispositivo Borrado Correctamente", "", "Close") );
+                                   
+                                             this.cache2.splice( this.highlightedRow,1);  
+                                                if((this.itemHeight * this.cache2.length + 50 ) < this.tracker.nativeElement.offsetHeight){
+                                                     if( this.paginationFlag )
+	                                                      this.start();	
+                                        }
+                                }               	           
+    } ); 
+    });
+
+    
+
+  }
+
+  initialize(){
+
+    this.cache2 = [];
+    this.paginationKey = "";
+    this.paginationFlag = false;
+    this.lastPaginationKey  ="!";
+
+    this.clientService.setUser(null);
 
   }
 
@@ -348,7 +382,10 @@ private extractData(res: any) {
 
     }
    }
-  
+  ngOnDestroy() {
+    if( this.subscriptionOkButton )
+        this.subscriptionOkButton.unsubscribe();
 
+}
   
 }

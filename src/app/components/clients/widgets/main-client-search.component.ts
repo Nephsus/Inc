@@ -77,7 +77,7 @@ executeQuery( codeuser : string ) : Observable<RegisteredDevicesOutputType> {
 }
 
 reset(){
- this.devicesResponse = null;
+ this.infiniteScrollListComponent.initialize();
 }
 
  ngOnDestroy() {
