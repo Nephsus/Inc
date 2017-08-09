@@ -20,6 +20,8 @@ public platform:string;
 public platformInvalid:boolean;
 public idDevice:string;
 public idDeviceInvalid:boolean;
+public tokenPush:string;
+public tokenPushInvalid:boolean;
 
 @Output() clickGoBack = new EventEmitter();
 
@@ -50,18 +52,31 @@ resolve(){
      else
         this.idDeviceInvalid = false;
 
+      if( !this.tokenPush )
+        this.tokenPushInvalid = true;
+     else
+        this.tokenPushInvalid = false;
 
-    if( this.platformInvalid ||   this.idDeviceInvalid ||  this.idDeviceInvalid )
+
+    if( this.platformInvalid ||   this.idDeviceInvalid ||  this.idDeviceInvalid  || this.tokenPushInvalid)
         return;
 
 
     this._devicesAvailableService.addDeviceToUser( this._clientService.getUser().getCode(),
                                                     this.idDevice,
                                                     this.model,
-                                                    this.platform  )
-                                 .subscribe( resp => 
+                                                    this.platform,
+                                                    this.tokenPush )
+                                                    
+                                 .subscribe( resp =>{ 
 
-                                      this._enviorementDashboard.receiveSuccessAction.next( new ResultData( ResultDataType.Success, resp.status, resp.description, undefined, "Close") )
+                                        if (resp.headerData && resp.headerData.errorData){
+                                               this._enviorementDashboard.receiveSuccessAction.next(new ResultData( ResultDataType.Error, "Error", resp.headerData.errorData.errorText, "", "Close"));
+                                        }
+                                        else
+                                            this._enviorementDashboard.receiveSuccessAction.next( new ResultData( ResultDataType.Success, resp.status, resp.description, "", "Close") );
+                                   
+                                    }
                                  );
 
 }   

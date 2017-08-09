@@ -5,13 +5,11 @@
                       "paginationKey":"2" 
                         }
                    },
-  "registeredDevicesOutputType": {
-    "user": {
-      "code": "27047709",
-      "name": "David",
-      "lastName": "Cava Jiménez",
-      "documentID": "30966054G"
-    },
-    "devicesRegistered": []
-   }
+  "insertDeviceOutputType": {
+    "status":"OK",
+    "description":"DISPOSITIVO DADO DE ALTA"
   }
+  }
+
+
+  

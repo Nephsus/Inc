@@ -4,8 +4,11 @@ import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
 import "rxjs/add/operator/switchMap"
 import { RegisteredDevicesOutputType } from "../models/services/devices/RegisteredDevicesOutputType";
+import { RegisterUserDeviceRequestType } from "../models/services/devices/RegisterUserDeviceRequestType";
 import { DeleteUserDevicesOutputType } from "../models/services/devices/DeleteUserDevicesOutputType";
-import { InsertDeviceOutputType } from "../models/services/devices/InsertDeviceOutputType";
+import { RegisterUserDeviceOutputType } from "../models/services/devices/RegisterUserDeviceOutputType";
+import { SendPushInputType } from "../models/services/devices/SendPushInputType";
+import { SendPushOutputType } from "../models/services/devices/SendPushOutputType";
 import { RequestWrapperService } from "./request-wrapper.services"
 import { environment } from '../../environments/environment';
 
@@ -35,9 +38,29 @@ export class DevicesAvailableService {
   }
   
 
-  addDeviceToUser( codeuser : string, deviceId: string, model:string, platform:string ){
-       return this._request.post( environment.baseUrl + environment.intermediateUrl + '/registereddevices/insertDevice' )
-                              .map( response =>  InsertDeviceOutputType.fromJson(response))
+  addDeviceToUser( codeuser : string, deviceId: string, model:string, platform:string, tokenPush:string ){
+
+       let param = new RegisterUserDeviceRequestType( codeuser, model, platform, deviceId, tokenPush )
+
+       return this._request.post( environment.baseUrl + environment.intermediateUrl + '/registereddevices/insertDevice', param )
+                              .map( response => {
+                                console.log(response);
+
+                                return  RegisterUserDeviceOutputType.fromJson(response); });
+      
+
+
+  }
+
+   sendPush( textPush : string, tokenPush: string){
+
+       let param = new SendPushInputType( textPush, tokenPush )
+
+       return this._request.post( environment.baseUrl + environment.intermediateUrl + '/msgPush/sendMsgPush', param )
+                              .map( response => {
+                                console.log(response);
+
+                                return  SendPushOutputType.fromJson(response); });
       
 
 

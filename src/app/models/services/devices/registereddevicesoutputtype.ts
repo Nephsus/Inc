@@ -27,7 +27,8 @@ static createArrayDevices(json:any): DevicesRegistered[]{
                 arrDevices.push( new DevicesRegistered( item.deviceType,
                                                         item.platform,
                                                         item.dischargeDate,
-                                                        item.lastCheckDate ) );
+                                                        item.lastCheckDate ,
+                                                        item.pushToken) );
         }
 
         return arrDevices;
@@ -43,14 +44,15 @@ export class DevicesRegistered {
 constructor(  public  deviceType : string, 
               public  platform : string, 
               public  dischargeDate : string, 
-              public  lastCheckDate : string){
+              public  lastCheckDate : string,
+              public  pushToken: string){
 
  }
 
 
  static fromJson(json: any): DevicesRegistered {
  
-    return new DevicesRegistered(json.deviceType,json.platform,json.dischargeDate,json.lastCheckDate );
+    return new DevicesRegistered(json.deviceType,json.platform,json.dischargeDate,json.lastCheckDate, json.pushToken );
 }
 
     getDeviceType():string{
@@ -67,6 +69,10 @@ constructor(  public  deviceType : string,
 
     getDateLastCheck():string{
         return this.lastCheckDate || '';
+    }
+
+    getPushToken():string{
+        return this.pushToken || '';
     }
 
 

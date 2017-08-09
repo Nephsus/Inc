@@ -39,8 +39,9 @@ import {flatMap} from "lodash";
                              </thead>
                             <tbody>
                               <tr class="gradeA odd" *ngFor="let item of cache2; let i = index" 
-                              (click)="selectedDevice(item, i)" [ngClass]="{'table-selected-row': i === highlightedRow}"
-                              [style.height]="itemHeight + 'px'">
+                              (click)="selectedDevice( i)" [ngClass]="{'table-selected-row': i === highlightedRow}"
+                              [style.height]="itemHeight + 'px'"
+                              role="button">
                                     <td style="width: 254px;">{{item.deviceType}}</td>
                                     <td style="width: 318px;">{{item.platform}}</td>
                                     <td style="width: 287px;"> {{item.dischargeDate}}</td>
@@ -137,11 +138,11 @@ export class InfiniteScrollListComponent implements AfterViewInit {
   public devicesResponse : RegisteredDevicesOutputType;
 
 
-  private disableOneButton : boolean = true;
-  private disableSecondButton : boolean = true;
-  private disableThirdButton : boolean = true;
-  private disableFourButton : boolean = true;
-  private disableFiveButton : boolean = true;
+  public disableOneButton : boolean = true;
+  public disableSecondButton : boolean = true;
+  public disableThirdButton : boolean = true;
+  public disableFourButton : boolean = true;
+  public disableFiveButton : boolean = true;
 
 
 
@@ -157,14 +158,14 @@ export class InfiniteScrollListComponent implements AfterViewInit {
 
   
   constructor(private _request: RequestWrapperService, private http: Http, 
-              private elementRef: ElementRef, private clientService : ClientService,
+              private elementRef: ElementRef, public clientService : ClientService,
              private _enviorementDashboard : EnviorementDashboardProvider){ 
       
   } 
 
-  selectedDevice( device : DevicesRegistered, i: number){
+  selectedDevice( i: number){
         this.highlightedRow = i;
-        this.clientService.setSelectedDevice( device );
+        this.clientService.setSelectedDevice( this.cache2[ i ] );
 
         this.disableOneButton  = false;
         this.disableSecondButton  = false;

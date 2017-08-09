@@ -1,6 +1,6 @@
 
 import { Injectable } from '@angular/core';
-import { Http, Response,URLSearchParams  } from "@angular/http";
+import { Http, Response,URLSearchParams, Headers  } from "@angular/http";
 import { Observable } from "rxjs/Observable"
 import { Router , NavigationExtras} from "@angular/router";
 
@@ -29,12 +29,12 @@ constructor( private _http:Http, private _router : Router, private _enviorement 
             return this._http.get(url,  { search: params } )
                       .map( resp =>{
                             let body = resp.json();
-                             if (body.headerData && body.headerData.errorData && body.headerData.errorData.errorType==='T'){
+                            /* if (body.headerData && body.headerData.errorData && body.headerData.errorData.errorType==='T'){
                                 this._enviorement.technicalError = body.headerData.errorData;
                                 throw new Error(body.headerData.errorData.errorText);
-                             }else{
+                             }else{*/
                                 return body;
-                            }
+                           // }
                       })
                       .catch((error: any) =>{
                             if (this._enviorement.technicalError.errorType === "F")
@@ -49,16 +49,18 @@ constructor( private _http:Http, private _router : Router, private _enviorement 
      }
 
       post(url:string, params?:any, headers?:any){
-            alert(url);
-            return this._http.post(url,{},{})
+
+           console.error("dale" + JSON.stringify(params));
+
+            return this._http.post(url,JSON.stringify(params),{ headers: new Headers({ 'Content-Type': 'application/json' }) })
                       .map( resp =>{
                             let body = resp.json();
-                             if (body.headerData && body.headerData.errorData){
-                                this._enviorement.technicalError = body.headerData.errorData;
-                                throw new Error(body.headerData.errorData.errorText);
-                             }else{
+                             //if (body.headerData && body.headerData.errorData && body.headerData.errorData.errorType==='T') {
+                                //this._enviorement.technicalError = body.headerData.errorData;
+                                //throw new Error(body.headerData.errorData.errorText);
+                            // }else{
                                 return body;
-                            }
+                            //}
                       })
                       .catch((error: any) =>{
                             if (this._enviorement.technicalError.errorType === "F")

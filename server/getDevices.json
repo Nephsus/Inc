@@ -17,7 +17,8 @@
         "deviceType": "iphone1",
         "platform": "iOS 9.0",
         "dischargeDate": "10/10/2017",
-        "lastCheckDate": "11/02/2017"
+        "lastCheckDate": "11/02/2017",
+        "tokenPush":"dfdsafafasfsadf"
       },
       {
         "deviceType": "xiaomi2",
@@ -29,7 +30,8 @@
         "deviceType": "dummy3",
         "platform": "Android 7.0",
         "dischargeDate": "10/10/2017",
-        "lastCheckDate": "11/02/2017"
+        "lastCheckDate": "11/02/2017",
+        "tokenPush":"dfdsafafasfsadf"
       },{
         "deviceType": "iphone4",
         "platform": "iOS 9.0",
@@ -40,7 +42,8 @@
         "deviceType": "xiaomi5",
         "platform": "Android 7.0",
         "dischargeDate": "10/10/2017",
-        "lastCheckDate": "11/02/2017"
+        "lastCheckDate": "11/02/2017",
+        "tokenPush":"dfdsafafasfsadf"
       },
       {
         "deviceType": "dummy6",
@@ -52,7 +55,8 @@
         "deviceType": "dummy7",
         "platform": "Android 7.0",
         "dischargeDate": "10/10/2017",
-        "lastCheckDate": "11/02/2017"
+        "lastCheckDate": "11/02/2017",
+        "tokenPush":"dfdsafafasfsadf"
       },{
         "deviceType": "iphone",
         "platform": "iOS 9.0",
@@ -63,30 +67,35 @@
         "deviceType": "xiaomi8",
         "platform": "Android 7.0",
         "dischargeDate": "10/10/2017",
-        "lastCheckDate": "11/02/2017"
+        "lastCheckDate": "11/02/2017",
+        "tokenPush":"dfdsafafasfsadf"
       },
       {
         "deviceType": "dummy9",
         "platform": "Android 7.0",
         "dischargeDate": "10/10/2017",
-        "lastCheckDate": "11/02/2017"
+        "lastCheckDate": "11/02/2017",
+        "tokenPush":"dfdsafafasfsadf"
       },
       {
         "deviceType": "dummy10",
         "platform": "Android 7.0",
         "dischargeDate": "10/10/2017",
-        "lastCheckDate": "11/02/2017"
+        "lastCheckDate": "11/02/2017",
+        "tokenPush":"dfdsafafasfsadf"
       },{
         "deviceType": "iphone11",
         "platform": "iOS 9.0",
         "dischargeDate": "10/10/2017",
-        "lastCheckDate": "11/02/2017"
+        "lastCheckDate": "11/02/2017",
+        "tokenPush":"dfdsafafasfsadf"
       },
       {
         "deviceType": "xiaomi12",
         "platform": "Android 7.0",
         "dischargeDate": "10/10/2017",
-        "lastCheckDate": "11/02/2017"
+        "lastCheckDate": "11/02/2017",
+        "tokenPush":"dfdsafafasfsadf"
       }
     ]
    }

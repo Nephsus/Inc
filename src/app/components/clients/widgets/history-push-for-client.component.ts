@@ -70,7 +70,8 @@ import {flatMap} from "lodash";
                             <tbody>
                               <tr class="gradeA odd" *ngFor="let item of cache2; let i = index" 
                               (click)="selectedDevice(item, i)" [ngClass]="{'table-selected-row': i === highlightedRow}"
-                              [style.height]="itemHeight + 'px'">
+                              [style.height]="itemHeight + 'px'"
+                              role="button">
                                     <td style="width: 40px;">{{item.alevsecu}}</td>
                                     <td style="width: 120px;">{{item.destiny}}</td>
                                     <td >{{item.read}}</td>
