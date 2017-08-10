@@ -56,64 +56,30 @@ import {flatMap} from "lodash";
                             </tbody>
 </table>
    </div>
-   
    <div class="container-fluid">
     <div class="row" >
-        <!--<a  *ngFor="let action of listActions; let i = index" 
-            class="btn btn-primary btn-rounded" 
-            style="margin-right: 5px;" 
-            (click)="clickAction( i + 1 )"  ><i class="fa fa-check"></i>{{action}}</a>-->
-
-            <a class="btn btn-primary btn-rounded" 
+            <a class="btn btn-primary btn-rounded"  data-toggle="tooltip" data-placement="bottom" title="Vizualizar"
             style="margin-right: 5px;" [class.disabled]="disableOneButton"
             (click)="clickAction( 1 )"  ><i class="fa fa-eye"></i> </a>
 
-            <a class="btn btn-primary btn-rounded" 
-            style="margin-right: 5px;"  [class.disabled]="disableSecondButton"
-            (click)="clickAction( 2 )"  ><i class="fa fa-minus"></i> </a>
-
-            <a class="btn btn-primary btn-rounded" 
+            <a class="btn btn-primary btn-rounded" data-toggle="tooltip" data-placement="bottom" title="Enviar Push"
             style="margin-right: 5px;"  [class.disabled]="disableThirdButton"
             (click)="clickAction( 3 )"  ><i class="fa fa-send"></i> </a>
 
-            <a class="btn btn-primary btn-rounded" 
+            <a class="btn btn-primary btn-rounded" data-toggle="tooltip" data-placement="bottom" title="Añadir Dispositivo"
             style="margin-right: 5px;"  [class.disabled]="disableFourButton"
             (click)="clickAction( 4 )"  ><i class="fa fa-plus"></i> </a>
 
-            <a class="btn btn-primary btn-rounded" 
+             <a class="btn btn-primary btn-rounded" data-toggle="tooltip" data-placement="bottom" title="Eliminar Dispositivo"
+            style="margin-right: 5px;"  [class.disabled]="disableSecondButton"
+            (click)="clickAction( 2 )"  ><i class="fa fa-minus"></i> </a>
+
+            <a class="btn btn-primary btn-rounded" data-toggle="tooltip" data-placement="bottom" title="Historial Envíos Push"
             style="margin-right: 5px;" [class.disabled]="disableFiveButton"
             (click)="clickAction( 5 )"  ><i class="fa fa-book"></i> </a>
 
     </div>
 </div>`
- /*template: 
-  <tr class="gradeA odd" *ngFor="let item of itemResults$|async; let i = index" 
- 
- `<table class="table table-bordered table-hover dataTables-example dataTable" style="margin-bottom:0px;" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
-                            <thead>
-                            <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 181px;">Tipo de Dispositivo</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 226px;">Plataforma</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" style="width: 204px;">Fecha Alta</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" style="width: 154px;">Fecha Última Comprobación</th></tr>
-                            </thead>
-</table>
- <div id='infinite-div'  style="width:100%; height:300px; overflow: auto;" #infinitediv>
-                  <table>
-                            <tbody>
-                                <tr class="gradeA odd" *ngFor="let item of itemResults$|async" [style.height]="itemHeight + 'px'">
-                                    <td style="width: 254px;">{{item.deviceType}}</td>
-                                    <td style="width: 318px;">{{item.platform}}</td>
-                                    <td style="width: 287px;"> {{item.dischargeDate}}</td>
-                                    <td>{{item.lastCheckDate}}</td>
-                                </tr>
-                                <tr *ngIf="showLoading == true" [style.height]="itemHeight + 'px'">
-                                            <td><img src="assets/img/rolling.gif" /></td>
-                                </tr>
-                            </tbody>
-        </table>
-   </div>`*/
-  //templateUrl:"./infinite-scroll.component.html"
 })
 export class InfiniteScrollListComponent implements AfterViewInit,OnDestroy {
   public cache : any[] = []; 
