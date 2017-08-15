@@ -1,8 +1,11 @@
-import { Component, OnInit, OnChanges } from "@angular/core";
+import { Component, OnInit, OnChanges, Output, EventEmitter } from "@angular/core";
 import { StatisticsService } from "../../../services/statistics.services"
 import { StatisticsServiceOutputType } from "../../../models/services/statistics/statisticsserviceoutputType";
+import { CurrentMonth } from "../../../models/services/statistics/CurrentMonth";
 import { ActivatedRoute } from "@angular/router";
 import { URLSearchParams  } from "@angular/http";
+
+
 
 @Component({
     selector: "line-chart-history",
@@ -17,7 +20,13 @@ export class LineChartHistory implements OnInit {
   // ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 
   //'Junio', 'Julio', 'Agosto', 'Septiembre' , 'Octubre', 'Noviembre', 'Diciembre'];
 
+ 
+  public listSenders: CurrentMonth;
 
+
+
+  @Output()
+  private refreshList : EventEmitter<CurrentMonth> =  new EventEmitter(); 
 
   constructor(public statisticsService : StatisticsService, public activatedRoute: ActivatedRoute ) {}
 
@@ -27,14 +36,29 @@ export class LineChartHistory implements OnInit {
                   lineChartsStatistics: StatisticsServiceOutputType })=>{
                   this.lineChartData   = data.lineChartsStatistics.lineChartData;
                   this.lineChartLabels = data.lineChartsStatistics.lineChartLabels;
+                  this.listSenders =  data.lineChartsStatistics.currentMonth;
+                  this.refreshList.emit( this.listSenders );
      });
   }
 
+  ngAfterViewInit() {
+    
+    
+  
 
-  refresh(monthSelected?:any, alarmSelected?: any ): void{
+  }
+
+
+  refresh(dateIni:any, dateFin:any, monthSelected?:any, alarmSelected?: any ): void{
 
     let params: URLSearchParams = new URLSearchParams();
-    params.set('monthSelected', monthSelected.key);
+    
+    
+    if( dateIni && dateFin ){
+      params.set('dateIni', dateIni.formatted);
+     params.set('dateFin', dateFin.formatted);
+   }
+   // params.set('monthSelected', monthSelected.key);
     
     if( alarmSelected !== undefined)
       params.set('alarmaSelected', alarmSelected.key);

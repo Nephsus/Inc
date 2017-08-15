@@ -8,6 +8,8 @@ import { StatisticsServiceOutputType }  from "../../../models/services/statistic
 import { SendAlarmsOutputType } from "../../../models/services/statistics/sendalarmsoutputtype";
 import { LineChartHistory } from "../widgets/line-chart-history.component"; 
 import { ClientService} from "../../clients/services/client.services"; 
+import { CurrentMonth } from "../../../models/services/statistics/CurrentMonth";
+import * as moment from 'moment';
 
 import { DatePickerOptions, DateModel } from 'ng2-datepicker';
 
@@ -15,6 +17,14 @@ import { DatePickerOptions, DateModel } from 'ng2-datepicker';
     templateUrl: "./main-statistics.component.html"
 })
 export class MainStatistics implements OnInit {
+
+
+  datePickerOptions ={
+    format: "DD-MM-YYYY",
+    autoApply: true,
+    locale: 'es',
+    firstWeekdaySunday: false
+  }
 
 
 public elementsFilter: StatisticsServiceFilterOutputType;
@@ -42,6 +52,16 @@ public selectedValueAlarm:any;
   public dateSearch : string;
   public date : any;
 
+
+  public dateIni : any;
+  public dateFin : any;
+
+
+  public valueErrorText: string;
+  public valueError: boolean = false;
+
+  public currentMonth:CurrentMonth;
+
 //public subjectST = new Subject<StatisticsServiceFilterOutputType>();
 
 constructor(private elementRef:ElementRef, private statisticsService: StatisticsService,  public clientService : ClientService) {
@@ -57,6 +77,10 @@ this.optionsDatePicker.format = 'DD/MM/YYYY';
 
 this.dateSearch='hoy';
 };
+
+
+
+
 
 mychange(val)
 {
@@ -75,10 +99,10 @@ mychange(val)
 
 
   ngAfterViewInit() {
-    var s = document.createElement("script");
-    s.type = "text/javascript";
-    s.innerText =" var mapData = {US: 298,SA: 200};$('#world-map').vectorMap({map: 'world_mill_en',backgroundColor: 'transparent',regionStyle: {initial: {fill: '#e4e4e4','fill-opacity': 0.9,stroke: 'none','stroke-width': 0,'stroke-opacity': 0}},series: {regions: [{values: mapData,scale: [ '#22d6b1'],normalizeFunction: 'polynomial'}]},});";
-    this.elementRef.nativeElement.appendChild(s);
+    //var s = document.createElement("script");
+    //s.type = "text/javascript";
+    //s.innerText =" var mapData = {US: 298,SA: 200};$('#world-map').vectorMap({map: 'world_mill_en',backgroundColor: 'transparent',regionStyle: {initial: {fill: '#e4e4e4','fill-opacity': 0.9,stroke: 'none','stroke-width': 0,'stroke-opacity': 0}},series: {regions: [{values: mapData,scale: [ '#22d6b1'],normalizeFunction: 'polynomial'}]},});";
+    //this.elementRef.nativeElement.appendChild(s);
   }
 
   ngOnInit(){
@@ -97,10 +121,61 @@ mychange(val)
     }
 
    executeFilter(){
-         this.childLine.refresh(this.selectedValueMonth,this.selectedValueAlarm );
+
+
+
+      if(this.dateIni){
+        if(this.dateIni.formatted  && moment(this.dateIni.formatted, 'DD-MM-YYYY',true).isValid() ){
+            if(!this.dateFin){
+              
+              this.valueError = true;
+              this.valueErrorText="Seleccione Fecha Fin."
+              return;
+            }
+        }else{
+            this.valueError = true;
+            this.valueErrorText="Fecha Inicio Incorrecta."
+            return;
+        }
+    }
+
+    if(this.dateFin){
+      if(this.dateFin.formatted  && moment(this.dateFin.formatted, 'DD-MM-YYYY',true).isValid() ){
+        if(!this.dateFin){
+           
+           this.valueError = true;
+           this.valueErrorText="Seleccione Fecha Inicio."
+           return;
+        }
+      }else{
+        this.valueError = true;
+        this.valueErrorText="Fecha Fin Incorrecta."
+        return;
+      }
+    }
+
+
+    if( this.dateIni && this.dateFin ){
+     if( moment(this.dateFin.formatted, 'DD-MM-YYYY').isBefore(moment(this.dateIni.formatted, 'DD-MM-YYYY')) ){
+      this.valueError = true;
+      this.valueErrorText="Fecha Fin no puede ser mayor que la fecha Inicio."
+      return; 
+     }
+    }
+
+      this.valueError = false;
+
+
+
+    
+      this.childLine.refresh(this.dateIni, this.dateFin, this.selectedValueMonth,this.selectedValueAlarm );
    }
     
 
+
+   refreshListSend(currentMonth){
+      this.currentMonth = currentMonth;
+   }
 
     
 }

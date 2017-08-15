@@ -13,12 +13,6 @@ import { EnviorementDashboardProvider } from './enviorement-dashboard.provider'
 @Injectable()
 export class RequestWrapperService {
 
-    /*
- "DevicesServiceResponse":   
- {"headerData" :{"errorData" :
- {"errorCode":"ER994","errorType":"T","errorText" : 
- "Cuenta origen inexistente."}}} 
-*/
 
 constructor( private _http:Http, private _router : Router, private _enviorement : EnviorementDashboardProvider){}
 
@@ -33,6 +27,7 @@ constructor( private _http:Http, private _router : Router, private _enviorement 
                                 this._enviorement.technicalError = body.headerData.errorData;
                                 throw new Error(body.headerData.errorData.errorText);
                              }else{*/
+                                console.error("Recepcion:" + body);
                                 return body;
                            // }
                       })

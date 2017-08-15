@@ -1,58 +1,6 @@
 { 
-  "statisticsServiceOutputType": 
-    { "lineChartLabels" : ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre" , "Octubre", "Noviembre", "Diciembre"],
-      "lineChartData": [
-        {
-          "data": [
-            0,
-            33,
-            44,
-            81,
-            56,
-            55,
-            40,
-            80,
-            999,
-            230,
-            67,
-            68
-          ],
-          "label": "Notificaciones email"
-        },
-        {
-          "data": [
-            0,
-            48,
-            40,
-            60,
-            86,
-            27,
-            90,
-            80,
-            1200,
-            50,
-            67,
-            78
-          ],
-          "label": "Notificaciones sms"
-        },
-        {
-          "data": [
-            0,
-            48,
-            77,
-            77,
-            100,
-            27,
-            40,
-            80,
-            10,
-            150,
-            50,
-            40
-          ],
-          "label": "Notificaciones push"
-        }
-      ]
-    }
-  }
+  "statisticsServiceOutputType": {
+    "currentMonth" : { "literal":"Enero-17","pushTotal" :"1.850","emailTotal" :"3.850","smsTotal" :"4.000"},
+    "lineChartLabels" : ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre" , "Octubre", "Noviembre", "Diciembre"],
+      "lineChartData": [{"data": [ 0,33, 44,81, 56,55,40,80,999,230,67,68],"label": "Notificaciones email"},{ "data": [0, 48,40,60,86,27,90,80,1200,50,67,78],"label": "Notificaciones sms"},{"data": [0, 48,77,77,100,27,40,80,10,150,50,40],"label": "Notificaciones push" }]}
+ }

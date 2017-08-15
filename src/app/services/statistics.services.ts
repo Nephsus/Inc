@@ -17,9 +17,6 @@ export class StatisticsService {
 
  getStadisticsResponse(params?: URLSearchParams ): Observable<StatisticsServiceOutputType> {
 
-
-       /* return this._http.get(environment.baseUrl + environment.intermediateUrl + '/statistics/getStadisticsResponse')
-                   .map((data: Response): StatisticsServiceOutputType => StatisticsServiceOutputType.fromJson(data.json()));*/
           return this._request.get(environment.baseUrl + environment.intermediateUrl + '/statistics/getStadisticsResponse', params)
                      .map(data => StatisticsServiceOutputType.fromJson(data));        
  

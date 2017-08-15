@@ -1,14 +1,27 @@
 <div class="row  border-bottom white-bg dashboard-header">
     <form class="form-horizontal" >
+        <h2>Bienvenido a INC</h2>
         <div class="form-group">
-       <div class="col-sm-6 col-md-12 col-lg-3 col-lg-offset-3">  
+        <div class="col-sm-6 col-md-12 col-lg-3 col-lg-offset-3">  
+           
            <label for="sel1">Rellene los campos de filtro:</label></div>
             <div class="col-sm-12 col-md-6 col-lg-3"> 
-                 <small>Mes:</small>
-                <select class="form-control" [(ngModel)]="selectedValueMonth" name="month">
-                <option *ngFor="let c of elementsFilter?.monthFilter" [ngValue]="c">{{c.value}}</option>
-                </select>
-            </div>
+                
+                        <div class="ibox-tools">
+                            <small>Fecha Inicio</small>
+                            <ng2-datepicker [(ngModel)]="dateIni" name="dateIni" [options]="datePickerOptions"></ng2-datepicker>
+                           
+                        </div>
+
+                        <div class="ibox-tools">
+                            <small>Fecha Fin</small>
+                            <ng2-datepicker [(ngModel)]="dateFin" name="dateFin" [options]="datePickerOptions"></ng2-datepicker>
+                           
+                        </div>
+
+                        <div *ngIf="valueError"> <font color="red">{{ valueErrorText }}</font></div>
+
+                </div>
             <div class="col-sm-12 col-md-6 col-lg-3">
                 <small>Tipo de Alarma:</small>
                 <select class="form-control" [(ngModel)]="selectedValueAlarm" name="alarm">
@@ -21,28 +34,28 @@
                     <a class="btn btn-primary btn-rounded" (click)="executeFilter()" ><i class="fa fa-check"></i>Filtrar</a>
                     
                 </div>
-            </div>
+  </div>
 </form>
 
                    <div class="col-sm-12 col-md-12 col-lg-3">
-                        <h2>Bienvenido a INC</h2>
-                        <small>Notificaciones enviadas en {{selectedValueMonth?.value}}</small>
+                        
+                        <h3 class="font-bold no-margins">Notificaciones enviadas en {{currentMonth?.literal}}</h3>
                         <ul class="list-group clear-list m-t">
                             <li class="list-group-item fist-item">
                                 <span class="pull-right">
-                                    1.454
+                                    {{currentMonth?.emailTotal}}
                                 </span>
                                 <span class="label label-success">1</span> Notificaciones email
                             </li>
                             <li class="list-group-item">
                                 <span class="pull-right">
-                                    2.454
+                                        {{currentMonth?.smsTotal}}
                                 </span>
                                 <span class="label label-info">2</span> Notificaciones sms
                             </li>
                             <li class="list-group-item">
                                 <span class="pull-right">
-                                    320
+                                        {{currentMonth?.pushTotal}}
                                 </span>
                                 <span class="label label-primary">3</span>Notificaciones push
                             </li>
@@ -62,7 +75,7 @@
                                 <div>
                                 </div>
 
-                                <line-chart-history></line-chart-history>
+                                <line-chart-history (refreshList)="refreshListSend($event)"></line-chart-history>
 
                             </div>
                         </div>
@@ -73,12 +86,33 @@
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Envíos totalizados por día.</h5>
-                        <div class="ibox-tools">
-                            <small>Seleccione fecha de consulta</small>
-                            <ng2-datepicker [(ngModel)]="date" (ngModelChange)="mychange($event)"></ng2-datepicker>
-                           
-                        </div>
+                       
+                        
+
+                        
+                      
                     </div>
+                    <div class="row">
+                            <div class="col-sm-12 col-md-6 col-lg-3 col-lg-offset-6">
+                                    <small>Seleccione fecha de consulta</small>
+                                    <ng2-datepicker [(ngModel)]="date" (ngModelChange)="mychange($event)"></ng2-datepicker>
+                                   
+                                </div>
+        
+                                <div class="col-sm-12 col-md-6 col-lg-3">
+                                        <small>Tipo de Alarma:</small>
+                                        <select class="form-control" [(ngModel)]="selectedValueAlarm" name="alarm">
+                                        <option *ngFor="let d of elementsFilter?.alarmTypes" [ngValue]="d">{{d.value}}</option>
+                                        </select>
+                                    </div>
+
+                    </div> &nbsp;
+                    <div class="form-group">
+                            <div class="container-fluid" style="float:right;">
+                               <a class="btn btn-primary btn-rounded" (click)="executeFilter()" ><i class="fa fa-check"></i>Filtrar</a>
+                               
+                           </div>
+             </div>
                     <div class="ibox-content">
                         <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">                                
                                 <canvas baseChart 
