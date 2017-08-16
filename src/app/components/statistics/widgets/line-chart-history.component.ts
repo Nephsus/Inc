@@ -1,11 +1,10 @@
-import { Component, OnInit, OnChanges, Output, EventEmitter } from "@angular/core";
+import { Component, OnInit, OnChanges, Output, EventEmitter,ViewChild } from "@angular/core";
 import { StatisticsService } from "../../../services/statistics.services"
 import { StatisticsServiceOutputType } from "../../../models/services/statistics/statisticsserviceoutputType";
 import { CurrentMonth } from "../../../models/services/statistics/CurrentMonth";
 import { ActivatedRoute } from "@angular/router";
 import { URLSearchParams  } from "@angular/http";
-
-
+import { BaseChartDirective } from 'ng2-charts/ng2-charts';
 
 @Component({
     selector: "line-chart-history",
@@ -20,6 +19,8 @@ export class LineChartHistory implements OnInit {
   // ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 
   //'Junio', 'Julio', 'Agosto', 'Septiembre' , 'Octubre', 'Noviembre', 'Diciembre'];
 
+
+  @ViewChild(BaseChartDirective) chart: BaseChartDirective;
  
   public listSenders: CurrentMonth;
 
@@ -65,14 +66,17 @@ export class LineChartHistory implements OnInit {
     
       this.statisticsService.getStadisticsResponse( params ).subscribe( 
                             (lineChartsStatistics: StatisticsServiceOutputType) =>
-                             {this.lineChartData = lineChartsStatistics.lineChartData;  
-                             this.lineChartLabels =  lineChartsStatistics.lineChartLabels;} );
+                             {this.lineChartData = lineChartsStatistics.lineChartData; 
+                              this.lineChartLabels = lineChartsStatistics.lineChartLabels; 
+                               this.chart.chart.config.data.labels = this.lineChartLabels;
+                              this.chart.chart.update();
+                            } );
 
   }
  
-    public lineChartOptions:any = { responsive: true };
+  public lineChartOptions:any = { responsive: true };
   public lineChartColors:Array<any> = [
-    { // grey
+    { 
       backgroundColor: 'rgba(28,132,198,0.2)',
       borderColor: '#1C84C6 ',
       pointBackgroundColor: 'rgba(148,159,177,1)',
@@ -80,7 +84,7 @@ export class LineChartHistory implements OnInit {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(148,159,177,0.8)'
     },
-    { // dark grey
+    { 
       backgroundColor: 'rgba(35,198,200,0.2)',
       borderColor: '#23C6C8',
       pointBackgroundColor: 'rgba(77,83,96,1)',
@@ -88,7 +92,7 @@ export class LineChartHistory implements OnInit {
       pointHoverBackgroundColor: '#fff',
       pointHoverBorderColor: 'rgba(77,83,96,1)'
     },
-    { // grey
+    { 
       backgroundColor: 'rgba(26,179,148,0.2)',
       borderColor: '#1AB394',
       pointBackgroundColor: 'rgba(148,159,177,1)',

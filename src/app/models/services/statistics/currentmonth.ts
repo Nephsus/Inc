@@ -1,6 +1,6 @@
 export class CurrentMonth{
 
-    constructor(literal:string,pushTotal :string,emailTotal :string, smsTotal :string){
+    constructor(public literal:string,public pushTotal :string,public emailTotal :string, public smsTotal :string){
 
     }
 

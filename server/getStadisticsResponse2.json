@@ -1,0 +1,1 @@
+{"statisticsServiceOutputType":{"lineChartData":[{"data":[13,14],"label":"Notificaciones email"},{"data":[5,80],"label":"Notificaciones sms"},{"data":[36,150],"label":"Notificaciones push"}],"lineChartLabels":["Julio","Agosto"],"currentMonth":{"literal":"Agosto","pushTotal":"18","emailTotal":"0","smsTotal":"0"}}}

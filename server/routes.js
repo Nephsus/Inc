@@ -4,6 +4,7 @@ var ACM_folder= "/Users/itecban/Documents/ITECBAN_ARGENTINA/Inc/server";
 
 var data = {
     getStadisticsResponse: JSON.parse(fs.readFileSync(ACM_folder+'/getStadisticsResponse.json', 'utf8')),
+    getStadisticsResponse2: JSON.parse(fs.readFileSync(ACM_folder+'/getStadisticsResponse2.json', 'utf8')),
     getDevices: JSON.parse(fs.readFileSync(ACM_folder+'/getDevices.json', 'utf8')),
     getDevicesError: JSON.parse(fs.readFileSync(ACM_folder+'/getDevicesError.json', 'utf8')),
     getUserWithoutDevices: JSON.parse(fs.readFileSync(ACM_folder+'/getUserWithoutDevices.json', 'utf8')),
@@ -22,7 +23,10 @@ module.exports = function (app) {
 
     app.get('/services/statistics/getStadisticsResponse', function (req, res) {
         console.log('get getStadisticsResponse');
-        res.send(data.getStadisticsResponse);
+         if(req.query.dateIni === undefined)
+            res.send(data.getStadisticsResponse);
+         else
+             res.send(data.getStadisticsResponse2);
     });
 
     app.get('/services/registereddevices/getDevices/:userCode/:paginationKey*?', function (req, res) {
