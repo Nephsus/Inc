@@ -182,13 +182,11 @@ mychange(val)
     
    executeFilterSendAlarm(){
 
-
-    let params: URLSearchParams = new URLSearchParams();
     
     
     //Queda configurar los parámetros de llamada
 
-    this.statisticsService.getSendAlarm( this.dateSearch ).subscribe( (response: SendAlarmsOutputType) =>{
+    this.statisticsService.getSendAlarm( this.date.formatted, (this.selectedSenderAlarm) ? this.selectedSenderAlarm.key : undefined ).subscribe( (response: SendAlarmsOutputType) =>{
       this.doughnutChartData = [ response.sendSms,response.sendEmail,response.sendPush];
       this.selectedValueMonth = this.elementsFilter.monthFilter[this.elementsFilter.monthFilter.length -1 ];
   })

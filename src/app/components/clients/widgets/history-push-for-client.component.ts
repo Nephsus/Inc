@@ -218,7 +218,7 @@ this.itemResults$ = this.pageToLoad$
        let pathComplete = "";    
         pathComplete = environment.baseUrl + 
                                 environment.intermediateUrl + 
-                                    `/alertPushHistory/getAlevHist/${this.codeUser}` +
+                                    `/alertPushHistory/getAlevHist/${this.clientService.getUser().getCode()}` +
                                     `${this.paginationKey}`;
 
       return this._request.get(pathComplete)

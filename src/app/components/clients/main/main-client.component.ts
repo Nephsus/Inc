@@ -25,6 +25,9 @@ export class MainClient implements OnInit,OnDestroy{
 
 
 
+
+
+
     @ViewChild(ClientListEvents)
     private clientListEvents: ClientListEvents;
 
@@ -50,7 +53,7 @@ export class MainClient implements OnInit,OnDestroy{
 
         if(action === 1)
           this.clientListEvents.show();
-        
+       
            
 
     }

@@ -11,7 +11,8 @@ constructor(    public alevsecu: string,
                 public response:string,
                 public readDate:string,
                 public readTime:string,
-                public read:string){
+                public read:string,
+                public url:string){
     
  }
 
