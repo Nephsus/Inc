@@ -69,14 +69,14 @@ import {flatMap} from "lodash";
                              </thead>
                             <tbody>
                               <tr class="gradeA odd" *ngFor="let item of cache2; let i = index" 
-                              (click)="selectedDevice(item, i)" [ngClass]="{'table-selected-row': i === highlightedRow}"
+                              (click)="selectedAlarm(item, i)" [ngClass]="{'table-selected-row': i === highlightedRow}"
                               [style.height]="itemHeight + 'px'"
                               role="button">
                                     <td style="width: 40px;">{{item.alevsecu}}</td>
                                     <td style="width: 120px;">{{item.destiny}}</td>
                                     <td >{{item.read}}</td>
-                                    <td>{{item.sendDate}}</td>
-                                    <td>{{item.readDate}}</td>
+                                    <td>{{item.sendDate}} - {{item.sendTime}}</td>
+                                    <td>{{item.readDate}} - {{item.readTime}}</td>
                                     <td>{{item.response}}</td>
                                 </tr>
                                 <tr *ngIf="showLoading == true" [style.height]="itemHeight + 'px'">
@@ -150,10 +150,10 @@ export class HistoryPushForClient implements AfterViewInit {
       
   } 
 
-  /*selectedDevice( device : DevicesRegistered, i: number){
+  selectedAlarm( alarm : AlertHistPush, i: number){
         this.highlightedRow = i;
-        this.clientService.setSelectedDevice( device );
-   }*/
+        alert(alarm.alevsecu + alarm.url);
+   }
 
 
    @Output() clickGoBack = new EventEmitter();
