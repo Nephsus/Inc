@@ -29,9 +29,21 @@ export class StatisticsService {
  
  }
 
- getSendAlarm( day: string = undefined): Observable<SendAlarmsOutputType> {
+ getSendAlarm( day: string = undefined, alarmSelected: string = undefined): Observable<SendAlarmsOutputType> {
         let dayQuery = day === undefined ? '' : day ;
-        return  this._request.get(environment.baseUrl + environment.intermediateUrl + '/statistics/getSendAlarmsResponse/' + dayQuery)
+
+        let params: URLSearchParams = new URLSearchParams();
+        
+        
+        if( dayQuery  ){
+          params.set('date', day);
+       }
+
+        
+        if( alarmSelected !== undefined)
+          params.set('alarmaSelected', alarmSelected);
+
+        return  this._request.get(environment.baseUrl + environment.intermediateUrl + '/statistics/getSendAlarmsResponse', params)
                     .map( response =>  SendAlarmsOutputType.fromJson(response));
 
  

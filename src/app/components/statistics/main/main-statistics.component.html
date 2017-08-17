@@ -101,7 +101,7 @@
         
                                 <div class="col-sm-12 col-md-6 col-lg-3">
                                         <small>Tipo de Alarma:</small>
-                                        <select class="form-control" [(ngModel)]="selectedValueAlarm" name="alarm">
+                                        <select class="form-control" [(ngModel)]="selectedSenderAlarm" name="alarm">
                                         <option *ngFor="let d of elementsFilter?.alarmTypes" [ngValue]="d">{{d.value}}</option>
                                         </select>
                                     </div>
@@ -109,7 +109,7 @@
                     </div> &nbsp;
                     <div class="form-group">
                             <div class="container-fluid" style="float:right;">
-                               <a class="btn btn-primary btn-rounded" (click)="executeFilter()" ><i class="fa fa-check"></i>Filtrar</a>
+                               <a class="btn btn-primary btn-rounded" (click)="executeFilterSendAlarm()" ><i class="fa fa-check"></i>Filtrar</a>
                                
                            </div>
              </div>

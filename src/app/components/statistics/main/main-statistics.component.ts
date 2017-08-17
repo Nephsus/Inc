@@ -31,6 +31,7 @@ public elementsFilter: StatisticsServiceFilterOutputType;
 
 public selectedValueMonth:any;
 public selectedValueAlarm:any;
+public selectedSenderAlarm:any;
 
 
 // Doughnut
@@ -87,10 +88,10 @@ mychange(val)
 
   this.dateSearch=val.formatted;
 
-  this.statisticsService.getSendAlarm( this.dateSearch ).subscribe( (response: SendAlarmsOutputType) =>{
+  /*this.statisticsService.getSendAlarm( this.dateSearch ).subscribe( (response: SendAlarmsOutputType) =>{
                 this.doughnutChartData = [ response.sendSms,response.sendEmail,response.sendPush];
                 this.selectedValueMonth = this.elementsFilter.monthFilter[this.elementsFilter.monthFilter.length -1 ];
-            });
+            });*/
 
 }
 
@@ -158,12 +159,20 @@ mychange(val)
     if( this.dateIni && this.dateFin ){
      if( moment(this.dateFin.formatted, 'DD-MM-YYYY').isBefore(moment(this.dateIni.formatted, 'DD-MM-YYYY')) ){
       this.valueError = true;
-      this.valueErrorText="Fecha Fin no puede ser mayor que la fecha Inicio."
+      this.valueErrorText="Fecha Fin no puede ser mayor que la fecha Inicio.";
       return; 
      }
     }
 
       this.valueError = false;
+
+      if( Math.floor(moment( this.dateFin ).diff(moment(this.dateIni),'years',true)) > 1 ){
+
+        this.valueError = true;
+        this.valueErrorText="El intervalo de fechas no puede ser superior a un año.";
+        return; 
+
+      }
 
 
 
@@ -171,7 +180,21 @@ mychange(val)
       this.childLine.refresh(this.dateIni, this.dateFin, this.selectedValueMonth,this.selectedValueAlarm );
    }
     
+   executeFilterSendAlarm(){
 
+
+    let params: URLSearchParams = new URLSearchParams();
+    
+    
+    //Queda configurar los parámetros de llamada
+
+    this.statisticsService.getSendAlarm( this.dateSearch ).subscribe( (response: SendAlarmsOutputType) =>{
+      this.doughnutChartData = [ response.sendSms,response.sendEmail,response.sendPush];
+      this.selectedValueMonth = this.elementsFilter.monthFilter[this.elementsFilter.monthFilter.length -1 ];
+  })
+
+
+   }
 
    refreshListSend(currentMonth){
       this.currentMonth = currentMonth;
