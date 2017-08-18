@@ -8,7 +8,8 @@ import { AlertPushHistoryOutputType } from '../../../models/services/push/AlertP
 import { AlertHistPush } from '../../../models/services/push/AlertHistPush';
 import { ClientService} from "../services/client.services";
 import { environment } from '../../../../environments/environment';
-
+import { URLSearchParams } from '@angular/http';
+import * as moment from 'moment';
 
 import 'rxjs/add/observable/fromEvent';
 import 'rxjs/add/operator/filter';  
@@ -53,6 +54,7 @@ import {flatMap} from "lodash";
                 <div class="col-md-2">
                             <a class="btn btn-primary btn-rounded" style="margin-right: 1px;"  (click)="launchSearchPush()"  ><i class="fa fa-check"></i>Aceptar</a>    
                  </div>
+                 <div *ngIf="valueError"><small> <font color="red">{{ valueErrorText }}</font></small></div>
             </div>
 
              <div class="row" >
@@ -65,6 +67,8 @@ import {flatMap} from "lodash";
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" >Leído</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >F. Envío</th> 
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >F. Lectura</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >Canal</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >Tipo</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >Respuesta</th></tr>   
                              </thead>
                             <tbody>
@@ -77,6 +81,8 @@ import {flatMap} from "lodash";
                                     <td >{{item.read}}</td>
                                     <td>{{item.sendDate}} - {{item.sendTime}}</td>
                                     <td>{{item.readDate}} - {{item.readTime}}</td>
+                                    <td>{{item.channel}}</td>
+                                    <td>{{item.type}}</td>
                                     <td>{{item.response}}</td>
                                 </tr>
                                 <tr *ngIf="showLoading == true" [style.height]="itemHeight + 'px'">
@@ -89,7 +95,7 @@ import {flatMap} from "lodash";
     <div class="row" >
         <a  class="btn btn-primary btn-rounded" 
             style="margin-right: 1px;" 
-            (click)="clickActionSeePush()"  ><i class="fa fa-eye"></i></a>
+            (click)="clickActionSeePush()" [class.disabled]="disableDetailButton"  ><i class="fa fa-eye"></i></a>
     </div>
 </div>
 </div>
@@ -109,10 +115,12 @@ export class HistoryPushForClient implements AfterViewInit {
 
   public cache : any[] = []; 
   public cache2 : AlertHistPush [] = []; 
+  public alarmDevice : AlertHistPush;
   private flatCache : any[] = []; 
   private pageByManual$ = new BehaviorSubject(1);
   private itemHeight = 40;
   private numberOfItems = 10; 
+  public disableDetailButton :boolean= true;
   @Input()
   public codeUser : string;
 
@@ -142,7 +150,8 @@ export class HistoryPushForClient implements AfterViewInit {
 
   highlightedRow: number;
 
-   //@Input() devicesRegistered : [DevicesRegistered];
+  public valueErrorText: string;
+  public valueError: boolean = false;
 
 
   
@@ -152,7 +161,8 @@ export class HistoryPushForClient implements AfterViewInit {
 
   selectedAlarm( alarm : AlertHistPush, i: number){
         this.highlightedRow = i;
-        alert(alarm.alevsecu + alarm.url);
+        this.alarmDevice = alarm;
+        this.disableDetailButton=false; 
    }
 
 
@@ -221,7 +231,16 @@ this.itemResults$ = this.pageToLoad$
                                     `/alertPushHistory/getAlevHist/${this.clientService.getUser().getCode()}` +
                                     `${this.paginationKey}`;
 
-      return this._request.get(pathComplete)
+
+        let params: URLSearchParams = undefined;
+         if( this.dateIni && this.dateFin ){
+                params = new URLSearchParams();
+                params.set('dateIni', this.dateIni.formatted);
+                params.set('dateFin', this.dateFin.formatted);
+          }
+
+
+      return this._request.get(pathComplete,params)
           .map( response => this.extractData(response) )
           .catch(resp =>{
               this.showLoading = false;
@@ -257,8 +276,84 @@ private extractData(res: any) {
     return AlertPushHistoryOutputType.fromJson(body.alertPushHistoryOutputType).alertHistPush || {};
   }
 
-  public start(){
-    
+  
+
+
+  
+
+  clickActionSeePush( ){
+        window.open(this.alarmDevice.url,'_blank');
+       
+   }
+
+
+   launchSearchPush(){
+    this.initialize();
+   
+  
+    if(this.dateIni && this.dateIni.formatted  && !moment(this.dateIni.formatted, 'DD-MM-YYYY',true).isValid() ){
+        this.valueError = true;
+        this.valueErrorText="(*)Fecha Inicio Incorrecta"
+        return;
+
+
+    }else if(this.dateIni && this.dateIni.formatted  && moment(this.dateIni.formatted, 'DD-MM-YYYY',true).isValid() ){
+        if(!this.dateFin || !this.dateFin.formatted){
+          this.valueError = true;
+          this.valueErrorText="(*)Seleccione Fecha Fin."
+          return;
+        }
+    }
+
+
+    if(this.dateFin && this.dateFin.formatted  && !moment(this.dateFin.formatted, 'DD-MM-YYYY',true).isValid() ){
+        this.valueError = true;
+        this.valueErrorText="(*)Fecha Fin Incorrecta."
+        return;
+
+
+    }else if(this.dateFin && this.dateFin.formatted  && moment(this.dateFin.formatted, 'DD-MM-YYYY',true).isValid() ){
+        if(!this.dateIni || !this.dateIni.formatted ){
+          this.valueError = true;
+          this.valueErrorText="(*)Seleccione Fecha Inicio."
+          return;
+        }
+    }
+
+
+    if( this.dateIni && this.dateFin ){
+     if( moment(this.dateFin.formatted, 'DD-MM-YYYY').isBefore(moment(this.dateIni.formatted, 'DD-MM-YYYY')) ){
+      this.valueError = true;
+      this.valueErrorText="(*)Fecha Fin no puede ser mayor que la fecha Inicio.";
+      return; 
+     }
+    }
+
+      this.valueError = false;
+
+      if( Math.floor(moment( this.dateFin ).diff(moment(this.dateIni),'years',true)) > 1 ){
+
+        this.valueError = true;
+        this.valueErrorText="(*)El intervalo de fechas no puede ser superior a un año.";
+        return; 
+
+      }
+
+
+
+
+
+
+
+
+        this.start();
+
+   }
+
+
+   public start(){
+    this.initialize();
+
     this.itemResults$.subscribe( 
        res => { this.cache2 = this.cache2.concat(res);}
      );
@@ -266,28 +361,16 @@ private extractData(res: any) {
   }
 
 
-  public deleteRow( ){
-    
-    this.cache2.splice( this.highlightedRow,1);
+  
 
-    if((this.itemHeight * this.cache2.length + 50 ) < this.tracker.nativeElement.offsetHeight){
-        if( this.paginationFlag )
-	     this.start();		           
-    }
+  initialize(){
 
+    this.cache2 = [];
+    this.paginationKey = "";
+    this.paginationFlag = false;
+    this.lastPaginationKey  ="!";
+    this.disableDetailButton= true;
+   
   }
-
-  clickActionSeePush( ){
-        window.open('http://www.google.es','_blank');
-       
-   }
-
-
-   launchSearchPush(){
-        console.log("David Ini" + this.dateIni);
-        console.log("David" + this.dateFin);
-
-
-   }
   
 }
