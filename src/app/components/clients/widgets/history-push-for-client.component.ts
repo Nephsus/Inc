@@ -342,12 +342,6 @@ private extractData(res: any) {
       }
 
 
-
-
-
-
-
-
         this.start();
 
    }

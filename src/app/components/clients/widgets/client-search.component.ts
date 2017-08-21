@@ -23,6 +23,7 @@ getClient(){
 }
 
 resetSearch(){
+   this.userCode="";
    this.reset.emit();
 }
 

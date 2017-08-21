@@ -28,7 +28,8 @@ static createArrayDevices(json:any): DevicesRegistered[]{
                                                         item.platform,
                                                         item.dischargeDate,
                                                         item.lastCheckDate ,
-                                                        item.pushToken) );
+                                                        item.pushToken,
+                                                        item.deviceId) );
         }
 
         return arrDevices;
@@ -45,14 +46,15 @@ constructor(  public  deviceType : string,
               public  platform : string, 
               public  dischargeDate : string, 
               public  lastCheckDate : string,
-              public  pushToken: string){
+              public  pushToken: string,
+              public  deviceId){
 
  }
 
 
  static fromJson(json: any): DevicesRegistered {
  
-    return new DevicesRegistered(json.deviceType,json.platform,json.dischargeDate,json.lastCheckDate, json.pushToken );
+    return new DevicesRegistered(json.deviceType,json.platform,json.dischargeDate,json.lastCheckDate, json.pushToken, json.deviceId );
 }
 
     getDeviceType():string{
@@ -73,6 +75,11 @@ constructor(  public  deviceType : string,
 
     getPushToken():string{
         return this.pushToken || '';
+    }
+
+
+    getDeviceID():string{
+        return this.deviceId || '';
     }
 
 

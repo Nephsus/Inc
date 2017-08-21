@@ -25,6 +25,7 @@ constructor(private _enviorementDashboard : EnviorementDashboardProvider,
             public clientService : ClientService){}
 
 goBack() {
+        this.textPush="";
         this.clickGoBack.emit();
    }
 
@@ -32,7 +33,7 @@ goBack() {
 resolve(){
 
 
-    alert("aprietame fuerrre=>" + this.textPush + "::::" + this.clientService.getSelectedDevice().getPushToken());
+    
 
     this._devicesAvailableService.sendPush(this.textPush, this.clientService.getSelectedDevice().getPushToken())
                 .subscribe( resp =>{ 
@@ -45,7 +46,7 @@ resolve(){
                                    
                                     });
 
-    //this._enviorementDashboard.receiveSuccessAction.next( );
+ 
 }   
 
 }

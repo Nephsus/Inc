@@ -3,7 +3,7 @@
                     <a class="navbar-minimalize minimalize-styl-2 btn btn-primary ">
                     <i class="fa fa-bars"></i> </a>
                        <div class="row" style="margin: 10px 5px 5px 20px;float: left;">
-                           <small><span *ngIf="_clientService.getUser()"> Usuario: {{_clientService.getUser()?.getName() || ''}} {{_clientService.getUser()?.getLastName() || ''}}</span> </small><br>
+                           <small><span *ngIf="_clientService.getUser()"> Cliente: {{_clientService.getUser()?.getName() || ''}} {{_clientService.getUser()?.getLastName() || ''}}</span> </small><br>
                            <small><span *ngIf="_clientService.getSelectedDevice()"> Dispositivo:  {{_clientService.getSelectedDevice()?.getDeviceType() }} {{_clientService.getSelectedDevice()?.getPlatform()}}</span></small>
                        </div>  
                 </div>

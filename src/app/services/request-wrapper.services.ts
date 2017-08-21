@@ -5,6 +5,7 @@ import { Observable } from "rxjs/Observable"
 import { Router , NavigationExtras} from "@angular/router";
 import {HeaderData} from '../models/services/headerdata';
 import { ErrorData } from "../models/services/generics/errordata";
+import { ClientService } from '../components/clients/services/client.services';
 
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/empty';
@@ -16,7 +17,7 @@ import { EnviorementDashboardProvider } from './enviorement-dashboard.provider'
 export class RequestWrapperService {
 
 
-constructor( private _http:Http, private _router : Router, private _enviorement : EnviorementDashboardProvider){}
+constructor( private _http:Http, private _router : Router, private _enviorement : EnviorementDashboardProvider, public _clientService : ClientService){}
 
      get(url:string, params?:URLSearchParams, headers?:any){
 
@@ -24,9 +25,7 @@ constructor( private _http:Http, private _router : Router, private _enviorement 
 
             return this._http.get(url,  { search: params } )
                       .map( resp =>{
-
-                        console.error("Recepcion:" + resp.status);
-                            let body = resp.json();
+                            
                             if( resp.status >= 400 && resp.status < 600){
                                 let headerData : HeaderData = new HeaderData();
                                 let errorData : ErrorData = new ErrorData(resp.statusText,"T","NETWORK")
@@ -34,21 +33,31 @@ constructor( private _http:Http, private _router : Router, private _enviorement 
                                  throw new Error(resp.statusText);
                              }
 
-                             if( resp.headers['content-type']=='text/html;charset=ISO-8859-1'){
-                                
-                                 this._router.navigate(['/login.jsp']);
- 
-                            }
+                            if( resp.headers.get('Content-Type')=='text/html;charset=ISO-8859-1'){
+                                window.location.href = "/inc/login.jsp";
+                                return Observable.empty(); 
+                           }
          
-
-                                console.error("Recepcion:" + body);
+                            let body = resp.json();
+                               
                                 return body;
                           
                       })
-                      .catch((error: any) =>{
-                            if (this._enviorement.technicalError.errorType === "F")
+                      .catch((error: Response) =>{
+
+                        if( error.status >= 400 && error.status < 600){
+                            this._clientService.setUser( null );
+                            let headerData : HeaderData = new HeaderData();
+                            let errorData : ErrorData = new ErrorData("Error de servidor: " + error.status,"T","Error de servidor: " + error.status)
+                             this._enviorement.technicalError = errorData
+                             this._router.navigate(['/technicalError']);
+                         }
+
+
+                            if (this._enviorement.technicalError.errorType === "T"){
+                                this._clientService.setUser( null );
                                 this._router.navigate(['/technicalError']);
-                            else
+                            }else
                                 return Observable.throw( this._enviorement.technicalError );
 
                             return Observable.empty();                
@@ -63,7 +72,7 @@ constructor( private _http:Http, private _router : Router, private _enviorement 
 
             return this._http.post(url,JSON.stringify(params),{ headers: new Headers({ 'Content-Type': 'application/json' }) })
                       .map( resp =>{
-
+                            console.error('David:' +resp.status);
                             if( resp.status >= 400 && resp.status < 600){
                                let headerData : HeaderData = new HeaderData();
                                let errorData : ErrorData = new ErrorData(resp.statusText,"T","NETWORK")
@@ -71,10 +80,10 @@ constructor( private _http:Http, private _router : Router, private _enviorement 
                                 throw new Error(resp.statusText);
                             }
 
-                            if( resp.headers['content-type']=='text/html;charset=ISO-8859-1'){
-                                
-                                 this._router.navigate(['/login.jsp']);
- 
+
+                            if( resp.headers.get('Content-Type')=='text/html;charset=ISO-8859-1'){
+                                 window.location.href = "/inc/login.jsp";
+                                 return Observable.empty(); 
                             }
          
                             let body = resp.json();
@@ -86,9 +95,18 @@ constructor( private _http:Http, private _router : Router, private _enviorement 
                             //}
                       })
                       .catch((error: any) =>{
-                            if (this._enviorement.technicalError.errorType === "F")
+                        if( error.status >= 400 && error.status < 600){
+                              this._clientService.setUser( null );
+                              let headerData : HeaderData = new HeaderData();
+                              let errorData : ErrorData = new ErrorData("Error de servidor: " + error.status,"T","Error de servidor: " + error.status)
+                              this._enviorement.technicalError = errorData
+                              this._router.navigate(['/technicalError']);
+                          }
+                             
+                            if (this._enviorement.technicalError.errorType === "T"){
+                                this._clientService.setUser( null );
                                 this._router.navigate(['/technicalError']);
-                            else
+                            }else
                                 return Observable.throw( this._enviorement.technicalError );
 
                             return Observable.empty();                

@@ -288,6 +288,7 @@ private extractData(res: any) {
 
   public start(){
     this.initialize();
+    
 
     this.itemResults$.subscribe( 
        res => { this.cache2 = this.cache2.concat(res);}
@@ -306,7 +307,7 @@ private extractData(res: any) {
     this.subscriptionOkButton = this._enviorementDashboard.receiveSuccessAction.subscribe( () =>{
                this.subscriptionOkButton.unsubscribe();
                this.devicesAvailableService.deleteUserDevice(this.clientService.getUser().getCode(),
-                        this.clientService.getSelectedDevice().getDeviceType() ).subscribe( resp => {
+                        this.clientService.getSelectedDevice().getDeviceID()).subscribe( resp => {
                             console.error("davvvv" + resp);
 
                               if (resp.headerData && resp.headerData.errorData && (resp.headerData.errorData.errorFlag === true)){
@@ -336,6 +337,12 @@ private extractData(res: any) {
     this.lastPaginationKey  ="!";
 
     this.clientService.setUser(null);
+
+
+    this.disableOneButton = true;
+    this.disableSecondButton  = true;
+    this.disableThirdButton  = true;
+    this.disableFourButton  = true;
 
   }
 

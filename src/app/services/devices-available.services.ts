@@ -33,7 +33,7 @@ export class DevicesAvailableService {
 
 
   deleteUserDevice( codeuser : string, deviceId: string) : Observable<DeleteUserDevicesResponseType>{
-       return this._request.get( environment.baseUrl + environment.intermediateUrl + `/deleteUserDevice/getDevices/${codeuser}/${deviceId}` )
+       return this._request.get( environment.baseUrl + environment.intermediateUrl + `/registereddevices/deleteUserDevice/${codeuser}/${deviceId}` )
                               .map( response =>  DeleteUserDevicesResponseType.fromJson(response))
 
   }
