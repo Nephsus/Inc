@@ -29,7 +29,9 @@ import {flatMap} from "lodash";
 
 @Component({
   selector: 'infinite-scroll-list',
-  template: `<p *ngIf="this.clientService.getUser()">Usuario encontrado con nombre {{this.clientService.getUser().getName()}} {{this.clientService.getUser().getLastName()}}  
+  template: `<p *ngIf="this.clientService.getUser()">Usuario encontrado con nombre {{this.clientService.getUser().getName()}} {{this.clientService.getUser().getLastName()}}   <a class="btn btn-primary btn-rounded" data-toggle="tooltip" data-placement="bottom" title="Historial Envíos Push"
+  style="margin-right: 5px;" 
+  (click)="clickAction( 5 )"  ><i class="fa fa-book"></i> </a> 
                 </p>
                 <div id='infinite-div'  style="width:100%; height:300px; overflow: auto;" #infinitediv>
 <table class="table table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
@@ -74,9 +76,7 @@ import {flatMap} from "lodash";
             style="margin-right: 5px;"  [class.disabled]="disableSecondButton"
             (click)="clickAction( 2 )"  ><i class="fa fa-minus"></i> </a>
 
-            <a class="btn btn-primary btn-rounded" data-toggle="tooltip" data-placement="bottom" title="Historial Envíos Push"
-            style="margin-right: 5px;" [class.disabled]="disableFiveButton"
-            (click)="clickAction( 5 )"  ><i class="fa fa-book"></i> </a>
+           
 
     </div>
 </div>`
@@ -111,7 +111,7 @@ export class InfiniteScrollListComponent implements AfterViewInit,OnDestroy {
   public disableSecondButton : boolean = true;
   public disableThirdButton : boolean = true;
   public disableFourButton : boolean = true;
-  public disableFiveButton : boolean = true;
+
 
  private subscriptionOkButton: Subscription;  
 
@@ -142,7 +142,7 @@ export class InfiniteScrollListComponent implements AfterViewInit,OnDestroy {
         this.disableSecondButton  = false;
         this.disableThirdButton = false;
         this.disableFourButton  = false;
-        this.disableFiveButton  = false;
+
    }
 
   ngAfterViewInit(){
@@ -172,9 +172,9 @@ export class InfiniteScrollListComponent implements AfterViewInit,OnDestroy {
         //calculo la siguiente la página a recibir
        this.showLoading = true;
        console.log("Entro y:" + y );
-       return Math.ceil((y + el.clientHeight)/ (this.itemHeight * this.numberOfItems));
-      
-    });
+       //return Math.ceil((y + el.clientHeight)/ (this.itemHeight * this.numberOfItems));
+       return this.paginationKey
+    }).distinct().map(_ =>  2);
 
 
 this.pageByResize$ = 
@@ -329,7 +329,7 @@ private extractData(res: any) {
   }
 
   initialize(){
-
+  
     this.cache2 = [];
     this.paginationKey = "";
     this.paginationFlag = false;

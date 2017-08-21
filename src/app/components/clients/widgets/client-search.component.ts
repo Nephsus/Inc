@@ -16,8 +16,10 @@ export class ClientSearch {
 
 getClient(){
 
-   if( this.userCode !== undefined)
+   if( this.userCode !== undefined){
+
     this.devicesLauncherSearch.emit( this.userCode );
+   }
 }
 
 resetSearch(){

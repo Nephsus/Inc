@@ -62,28 +62,27 @@ import {flatMap} from "lodash";
                 <table class="table table-bordered table-hover dataTables-example dataTable" id="DataTables_Table_0" aria-describedby="DataTables_Table_0_info" role="grid">
                             <thead>
                             <tr role="row">
-                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 40px; height: 30px">Secuencia</th>
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >Canal</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >Tipo</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="Rendering engine: activate to sort column descending" style="width: 40px; height: 30px">Secuencia</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Browser: activate to sort column ascending" style="width: 226px;">Destino</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Platform(s): activate to sort column ascending" >Leído</th>
                                 <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >F. Envío</th> 
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >F. Lectura</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >Canal</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >Tipo</th>
-                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >Respuesta</th></tr>   
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Engine version: activate to sort column ascending" >F. Lectura</th>   
                              </thead>
                             <tbody>
                               <tr class="gradeA odd" *ngFor="let item of cache2; let i = index" 
                               (click)="selectedAlarm(item, i)" [ngClass]="{'table-selected-row': i === highlightedRow}"
                               [style.height]="itemHeight + 'px'"
                               role="button">
+                                    <td>{{item.channel}}</td>
+                                    <td style="width: 300px;">{{item.type}}</td>
                                     <td style="width: 40px;">{{item.alevsecu}}</td>
                                     <td style="width: 120px;">{{item.destiny}}</td>
                                     <td >{{item.read}}</td>
                                     <td>{{item.sendDate}} - {{item.sendTime}}</td>
                                     <td>{{item.readDate}} - {{item.readTime}}</td>
-                                    <td>{{item.channel}}</td>
-                                    <td>{{item.type}}</td>
-                                    <td>{{item.response}}</td>
+                                   
                                 </tr>
                                 <tr *ngIf="showLoading == true" [style.height]="itemHeight + 'px'">
                                             <td><img src="assets/img/rolling.gif" /></td>
@@ -201,8 +200,9 @@ export class HistoryPushForClient implements AfterViewInit {
       .map((y:number) => {
         //calculo la siguiente la página a recibir
        this.showLoading = true;
-       return Math.ceil((y + el.clientHeight)/ (this.itemHeight * this.numberOfItems));
-    });
+       //return Math.ceil((y + el.clientHeight)/ (this.itemHeight * this.numberOfItems));
+        return this.paginationKey
+    }).distinct().map(_ =>  2);
 
 
 this.pageByResize$ = 
@@ -225,10 +225,12 @@ this.itemResults$ = this.pageToLoad$
     .do(_ => this.loading = true)
    
     .flatMap((page: number) => {
-       let pathComplete = "";    
+       let pathComplete = "";  
+        
+       
         pathComplete = environment.baseUrl + 
                                 environment.intermediateUrl + 
-                                    `/alertPushHistory/getAlevHist/${this.clientService.getUser().getCode()}` +
+                                    `/alertPushHistory/getAlevHist/${this.clientService.getUser().getPersNumb()}` +
                                     `${this.paginationKey}`;
 
 

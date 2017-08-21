@@ -1,7 +1,7 @@
 
 <form class="form-horizontal">
     <div class="form-group"><label class="col-lg-2 control-label">Código de Cliente</label>
-        <div class="col-lg-10"><input type="text" placeholder="Codigo" [(ngModel)]="userCode" autocomplete="off" class="form-control"  name="userCode" required="">
+        <div class="col-lg-10"><input type="text" placeholder="Codigo" [(ngModel)]="userCode" autocomplete="off" class="form-control"  name="userCode" required="" (keyup.enter)="getClient()">
         </div>
     </div>
     <div class="form-group">

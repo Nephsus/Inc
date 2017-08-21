@@ -15,7 +15,7 @@ static fromJson(json: any): RegisteredDevicesOutputType {
     }
 
 static createUserfromJson(json:any): User {
-        return new User(json.code,json.name,json.lastName,json.documentID);
+        return new User(json.code,json.name,json.lastName,json.documentID, json.persNum);
    }
 
 
