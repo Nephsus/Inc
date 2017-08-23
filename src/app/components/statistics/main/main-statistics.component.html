@@ -1,33 +1,194 @@
-<div class="row  border-bottom white-bg dashboard-header">
+<!--<div class="row white-bg dashboard-header">
+        <h2>Bienvenido a INC</h2> <small>Centro de Notificaciones Itecban.</small><br>
+</div>-->
+<div class="row  white-bg">
+    <div class="col-sm-12 col-md-6 col-lg-3">
+        <h2>Bienvenido a INC</h2>  
+        <small>Centro de Notificaciones Itecban.</small> 
+    </div><br>
+        <div class="col-sm-12 col-md-6 col-lg-3"> 
+                
+                <label for="sel1">Rellene los campos de filtro:</label>
+        </div>
+                <div class="col-sm-12 col-md-12 col-lg-3"> 
+                            <small>Fecha Inicio</small>
+                            <ng2-datepicker [(ngModel)]="dateIni" name="dateIni" [options]="datePickerOptions"></ng2-datepicker>
+                   </div>        
+                        
+
+                   <div class="col-sm-12 col-md-12 col-lg-3">  
+                            <small>Fecha Fin  &nbsp;&nbsp;&nbsp;</small>
+                            <ng2-datepicker [(ngModel)]="dateFin" name="dateFin" [options]="datePickerOptions"></ng2-datepicker>
+                           
+                     </div>
+
+                        <div *ngIf="valueError"> <font color="red">{{ valueErrorText }}</font></div>
+                     <div class="col-sm-12 col-md-12 col-lg-6 col-lg-offset-3">
+                                <small>Tipo de Alarma:</small>
+                                <select class="form-control" [(ngModel)]="selectedValueAlarm" name="alarm">
+                                <option *ngFor="let d of elementsFilter?.alarmTypes" [ngValue]="d">{{d.value}}</option>
+                                </select>
+                     </div>
+                
+</div>
+
+
+<div class="row   white-bg ">
+        <br>
+        <div class="container-fluid" style="float:right;">
+                <a class="btn btn-primary btn-rounded" (click)="executeFilter()" ><i class="fa fa-check"></i>Filtrar</a>
+                
+            </div>
+</div>
+
+
+<div class="row   white-bg ">
+        <div class="col-sm-12 col-md-12 col-lg-3">
+                <small>Notificaciones Totales enviadas en {{currentMonth?.literal}}</small>
+                <ul class="list-group clear-list m-t">
+                    <li class="list-group-item fist-item">
+                        <span class="pull-right">
+                            {{currentMonth?.emailTotal}}
+                        </span>
+                        <span class="label label-success">1</span> Notificaciones email
+                    </li>
+                    <li class="list-group-item">
+                        <span class="pull-right">
+                                {{currentMonth?.smsTotal}}
+                        </span>
+                        <span class="label label-info">2</span> Notificaciones sms
+                    </li>
+                    <li class="list-group-item">
+                        <span class="pull-right">
+                                {{currentMonth?.pushTotal}}
+                        </span>
+                        <span class="label label-primary">3</span>Notificaciones push
+                    </li>
+                </ul>
+            </div>
+
+            <div class="col-sm-12 col-md-12 col-lg-9">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-content">
+                                <div>
+                                    
+                                    <h3 class="font-bold no-margins">
+                                        Envíos totalizamos por meses.
+                                    </h3>
+                                    <small>&nbsp;</small>
+                                </div>
+                            <line-chart-history (refreshList)="refreshListSend($event)"></line-chart-history>
+    
+                        </div>
+                    </div>
+                </div>
+
+</div>
+
+<div class="row white-bg dashboard-header">
+        <div class="col-lg-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>Envíos totalizados por día.</h5>   
+                </div>
+                <div class="row">
+                        <div class="col-sm-12 col-md-6 col-lg-3 col-lg-offset-6">
+                                <small>Seleccione fecha de consulta</small>
+                                <ng2-datepicker [(ngModel)]="date" [options]="datePickerOptions"></ng2-datepicker>
+                               
+                            </div>
+    
+                            <div class="col-sm-12 col-md-6 col-lg-3">
+                                    <small>Tipo de Alarma:</small>
+                                    <select class="form-control" [(ngModel)]="selectedSenderAlarm" name="selectedSenderAlarm" >
+                                    <option *ngFor="let d of elementsFilter?.alarmTypes" [ngValue]="d">{{d.value}}</option>
+                                    </select>
+                                </div>
+
+                </div> &nbsp;
+                <div class="form-group">
+                        <div class="container-fluid" style="float:right;">
+                           <a class="btn btn-primary btn-rounded" (click)="executeFilterSendAlarm()" ><i class="fa fa-check"></i>Filtrar</a>
+                           
+                       </div>
+         </div>
+                <div class="ibox-content">
+                    <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">                                
+                            <canvas baseChart 
+                                    [data]="doughnutChartData"
+                                    [labels]="doughnutChartLabels"
+                                    [options]="doughnutChartOptions"
+                                    [chartType]="doughnutChartType"
+                                    [colors]="doughnutChartColors"
+                                    [legend]=false></canvas>
+                     </div>
+                     <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                <div class="panel panel-success">
+                                    <div class="panel-heading">
+                                        Envíos Email
+                                    </div>
+                                    <div class="panel-body">
+                                        <h1 class="no-margins">{{doughnutChartData[0]}}</h1>
+                                        <small>Realizados {{dateSearch}}</small>
+                                    </div>
+                                </div>
+                      </div>
+                           <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                <div class="panel panel-info">
+                                    <div class="panel-heading">
+                                        Envíos Sms
+                                    </div>
+                                    <div class="panel-body">
+                                        <h1 class="no-margins">{{doughnutChartData[1]}}</h1>
+                                        <small>Realizados {{dateSearch}}</small>
+                                    </div>
+                                </div>
+                      </div>
+                            <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+                                <div class="panel panel-primary">
+                                    <div class="panel-heading">
+                                        Envíos Push
+                                    </div>
+                                    <div class="panel-body">
+                                        <h1 class="no-margins">{{doughnutChartData[2]}}</h1>
+                                        <small>Realizados {{dateSearch}}</small>
+                                    </div>
+                                </div>
+                      </div>
+                </div>
+                
+            </div>
+        </div>
+        </div>
+
+
+
+
+
+<!--<div class="row  border-bottom white-bg dashboard-header">
     <form class="form-horizontal" >
-        <h2>Bienvenido a INC</h2>
+        <h2>Bienvenido a INC</h2> <small>Centro de Notificaciones Itecban.</small><br>
         <div class="form-group">
-        <div class="col-sm-6 col-md-12 col-lg-3 col-lg-offset-3">  
-           
+        <div class="col-sm-6 col-md-12 col-lg-3">  
            <label for="sel1">Rellene los campos de filtro:</label></div>
             <div class="col-sm-12 col-md-6 col-lg-3"> 
                 
-                        <div class="ibox-tools">
+                   <div>
                             <small>Fecha Inicio</small>
                             <ng2-datepicker [(ngModel)]="dateIni" name="dateIni" [options]="datePickerOptions"></ng2-datepicker>
-                           
-                        </div>
+                   </div>        
+                        
 
-                        <div class="ibox-tools">
+                     <div> 
                             <small>Fecha Fin</small>
                             <ng2-datepicker [(ngModel)]="dateFin" name="dateFin" [options]="datePickerOptions"></ng2-datepicker>
                            
-                        </div>
+                     </div>
 
                         <div *ngIf="valueError"> <font color="red">{{ valueErrorText }}</font></div>
 
                 </div>
-            <div class="col-sm-12 col-md-6 col-lg-3">
-                <small>Tipo de Alarma:</small>
-                <select class="form-control" [(ngModel)]="selectedValueAlarm" name="alarm">
-                <option *ngFor="let d of elementsFilter?.alarmTypes" [ngValue]="d">{{d.value}}</option>
-                </select>
-            </div>
+            
 </div>
  <div class="form-group">
                  <div class="container-fluid" style="float:right;">
@@ -38,8 +199,7 @@
 </form>
 
                    <div class="col-sm-12 col-md-12 col-lg-3">
-                        
-                        <h3 class="font-bold no-margins">Notificaciones enviadas en {{currentMonth?.literal}}</h3>
+                        <small>Notificaciones Totales enviadas en {{currentMonth?.literal}}</small>
                         <ul class="list-group clear-list m-t">
                             <li class="list-group-item fist-item">
                                 <span class="pull-right">
@@ -67,7 +227,7 @@
                                     <div>
                                         
                                         <h3 class="font-bold no-margins">
-                                            Envíos totalizamos en doce meses a partir de  {{selectedValueMonth?.value}}
+                                            Envíos totalizamos por meses.
                                         </h3>
                                         <small>&nbsp;</small>
                                     </div>
@@ -85,12 +245,7 @@
             <div class="col-lg-12">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
-                        <h5>Envíos totalizados por día.</h5>
-                       
-                        
-
-                        
-                      
+                        <h5>Envíos totalizados por día.</h5>   
                     </div>
                     <div class="row">
                             <div class="col-sm-12 col-md-6 col-lg-3 col-lg-offset-6">
@@ -160,5 +315,5 @@
                     
                 </div>
             </div>
-            </div>
-           <div class="row">&nbsp;</div>
+            </div>-->
+<div class="row">&nbsp;</div>

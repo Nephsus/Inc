@@ -60,9 +60,6 @@ import {flatMap} from "lodash";
    </div>
    <div class="container-fluid">
     <div class="row" >
-            <a class="btn btn-primary btn-rounded"  data-toggle="tooltip" data-placement="bottom" title="Vizualizar"
-            style="margin-right: 5px;" [class.disabled]="disableOneButton"
-            (click)="clickAction( 1 )"  ><i class="fa fa-eye"></i> </a>
 
             <a class="btn btn-primary btn-rounded" data-toggle="tooltip" data-placement="bottom" title="Enviar Push"
             style="margin-right: 5px;"  [class.disabled]="disableThirdButton"
@@ -107,7 +104,6 @@ export class InfiniteScrollListComponent implements AfterViewInit,OnDestroy {
   public devicesResponse : RegisteredDevicesOutputType;
 
 
-  public disableOneButton : boolean = true;
   public disableSecondButton : boolean = true;
   public disableThirdButton : boolean = true;
   public disableFourButton : boolean = true;
@@ -138,7 +134,7 @@ export class InfiniteScrollListComponent implements AfterViewInit,OnDestroy {
         this.highlightedRow = i;
         this.clientService.setSelectedDevice( this.cache2[ i ] );
 
-        this.disableOneButton  = false;
+
         this.disableSecondButton  = false;
         this.disableThirdButton = false;
         this.disableFourButton  = false;
@@ -338,8 +334,6 @@ private extractData(res: any) {
 
     this.clientService.setUser(null);
 
-
-    this.disableOneButton = true;
     this.disableSecondButton  = true;
     this.disableThirdButton  = true;
     this.disableFourButton  = true;
